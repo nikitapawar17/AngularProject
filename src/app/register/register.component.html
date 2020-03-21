@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5 mx-auto">
+            <form (submit)="register()">
+            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+            <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="text" class="form-control" name="first_name" placeholder="Enter your firstname" [(ngModel)]="credentials.first_name">
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Enter your lastname" [(ngModel)]="credentials.last_name">
+            </div>
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" class="form-control" name="username" placeholder="Enter your username" [(ngModel)]="credentials.username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter your email ddress" [(ngModel)]="credentials.email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="credentials.password">
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
