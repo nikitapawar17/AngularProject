@@ -19,11 +19,16 @@ export class LoginComponent{
 
       login() {
           this.auth.login(this.credentials).subscribe(
-              () => {
-                  this.router.navigateByUrl('/profile')
+            response => {
+                console.log(response["message"])
+                alert(response["message"])
+                // alert("User" + " " + this.credentials.username + " " + "has logged in")
+                //   this.router.navigateByUrl('/profile')
               },
-              err => {
-                  console.error(err)
+              error => {
+                  console.log(error)
+                //   console.error('error', error)
+                  alert(error["message"])
               }
           )
       }

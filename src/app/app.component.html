@@ -22,7 +22,7 @@
         <a class="nav-link" routerLink='/profile'>{{ auth.getUserDetails()?.identity.first_name }}</a>
       </li>
 
-      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+      <li *ngIf="auth.isLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink='' (click)="auth.logout()">Logout</a>
       </li>
 
