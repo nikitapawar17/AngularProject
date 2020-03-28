@@ -1,15 +1,21 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mt-5 mx-auto">
+<div class="row justify-content-center" style="margin-top: 50px">
+    <div class="col-sm-4">
+        <div class="card">
+            <header class="card-header">
+                <h4 class="card-title mt-2">Register</h4>
+            </header>
+            <article class="card-body">
             <form (submit)="register()">
-            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-            <div class="form-group">
+            <!-- <h1 class="h3 mb-3 font-weight-normal">Register</h1> -->
+            <div class="form-row">
+                <div class="col form-group">
                 <label for="name">First Name</label>
                 <input type="text" class="form-control" name="first_name" placeholder="Enter your firstname" [(ngModel)]="credentials.first_name">
             </div>
-            <div class="form-group">
+            <div class="col form-group">
                 <label for="name">Last Name</label>
                 <input type="text" class="form-control" name="last_name" placeholder="Enter your lastname" [(ngModel)]="credentials.last_name">
+            </div>
             </div>
             <div class="form-group">
                 <label for="username">User Name</label>
@@ -25,6 +31,7 @@
             </div>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
             </form>
+            </article>
         </div>
     </div>
 </div>

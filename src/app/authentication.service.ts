@@ -96,7 +96,7 @@ export class AuthenticationService{
     }
 
     public profile(user : TokenPayload): Observable<any> {
-        return this.http.get(`/users/profile`, {
+        return this.http.get('http://127.0.0.1:8000/user_details/', {
             headers: { Authorization: `${this.getToken()}` }
         })
     }
@@ -106,4 +106,37 @@ export class AuthenticationService{
         window.localStorage.removeItem('usertoken')
         this.router.navigateByUrl('/')
     }
+
+
+    public forgot_password(user : TokenPayload): Observable<any> {
+        console.log(user)
+        const base = this.http.post('http://127.0.0.1:8000/forgot_password/', user)
+
+        const request = base.pipe(
+            map((data: TokenResponse) => {
+                if (data.token) {
+                    this.saveToken(data.token)
+                }
+                return data 
+            })
+        )
+        return request
+    }
+
+
+    public reset_password(user : TokenPayload): Observable<any> {
+        console.log(user)
+        const base = this.http.post('http://127.0.0.1:8000/reset_password/', user)
+
+        const request = base.pipe(
+            map((data: TokenResponse) => {
+                if (data.token) {
+                    this.saveToken(data.token)
+                }
+                return data 
+            })
+        )
+        return request
+    }
+
 }

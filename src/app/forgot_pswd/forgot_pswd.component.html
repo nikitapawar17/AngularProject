@@ -1,0 +1,19 @@
+<div class="row justify-content-center" style="margin-top: 50px">
+    <div class="col-sm-4">
+        <div class="card">
+            <header class="card-header">
+                <h4 class="card-title mt-2">Forgot Password</h4>
+                <p>Please enter your email address, we will send the password reset link to your mail.</p>
+            </header>
+            <article class="card-body">
+            <form (submit)="forgot_password()">
+            <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter email address" [(ngModel)]="credentials.email">
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Send password reset email</button>
+            </form>
+            </article>
+        </div>
+    </div> 

@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
+import { ForgotPswdComponent } from './forgot_pswd/forgot_pswd.component'
+import { ResetPswdComponent } from './reset_pswd/reset_pswd.component'
 import { ProfileComponent } from './profile/profile.component'
 import { HomeComponent } from './home/home.component'
 import { AuthenticationService } from './authentication.service'
@@ -17,6 +19,8 @@ const routes : Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
+  { path: 'forgot_password', component: ForgotPswdComponent},
+  { path: 'reset_password', component: ResetPswdComponent},
   {
     path: 'profile', 
     component: ProfileComponent,
@@ -32,6 +36,8 @@ const routes : Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    ForgotPswdComponent, 
+    ResetPswdComponent
   ],
   imports: [
     BrowserModule,

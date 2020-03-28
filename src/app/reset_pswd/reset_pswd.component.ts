@@ -3,9 +3,9 @@ import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 
 @Component({
-    templateUrl: './register.component.html'
+    templateUrl: './reset_pswd.component.html'
 })
-export class RegisterComponent{
+export class ResetPswdComponent{
     credentials: TokenPayload = {
         id: 0,
         first_name: '',
@@ -17,8 +17,8 @@ export class RegisterComponent{
 
       constructor(private auth : AuthenticationService, private router : Router ) { }
 
-      register() {
-          this.auth.register(this.credentials).subscribe(
+      reset_password() {
+          this.auth.reset_password(this.credentials).subscribe(
               response => {
                   console.log(response["message"])
                   // alert(response)

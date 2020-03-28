@@ -3,9 +3,9 @@ import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 
 @Component({
-    templateUrl: './login.component.html'
+    templateUrl: './forgot_pswd.component.html'
 })
-export class LoginComponent{
+export class ForgotPswdComponent{
     credentials: TokenPayload = {
         id: 0,
         first_name: '',
@@ -17,8 +17,8 @@ export class LoginComponent{
 
       constructor(private auth : AuthenticationService, private router : Router ) { }
 
-      login() {
-          this.auth.login(this.credentials).subscribe(
+      forgot_password() {
+          this.auth.forgot_password(this.credentials).subscribe(
             response => {
                 console.log(response["message"])
                 alert(response["message"])

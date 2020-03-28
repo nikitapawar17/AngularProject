@@ -1,8 +1,12 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mt-5 mx-auto">
+<div class="row justify-content-center" style="margin-top: 50px">
+    <div class="col-sm-4">
+        <div class="card">
+            <header class="card-header">
+                <h4 class="card-title mt-2">Login</h4>
+            </header>
+            <article class="card-body">
             <form (submit)="login()">
-            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+            <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
             <div class="form-group">
                 <label for="username">UserName</label>
                 <input type="text" class="form-control" name="username" placeholder="Enter username" [(ngModel)]="credentials.username">
@@ -12,7 +16,12 @@
                 <input type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="credentials.password">
             </div>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+            <!-- <a [routerLink]="['/forgot_password']" class="btn btn-link">Forgot Password ? Click Here</a> -->
+            <a class="nav-link" routerLink='/forgot_password'
+             style="text-align: right;">Forgot Password ? Click Here</a>
+
             </form>
+            </article>
         </div>
     </div>
 </div>
