@@ -12,7 +12,11 @@ export class ForgotPswdComponent{
         last_name: '',
         username: '',
         email: '',
-        password: ''
+        password: '',
+        confirm_password: '',
+
+        token_value: '',
+        token_value1: ''
       }
 
       constructor(private auth : AuthenticationService, private router : Router ) { }

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core'
 import { AuthenticationService, TokenPayload } from '../authentication.service'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
+import {map} from 'rxjs/operators'
+
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
     templateUrl: './reset_pswd.component.html'
@@ -12,31 +15,60 @@ export class ResetPswdComponent{
         last_name: '',
         username: '',
         email: '',
-        password: ''
+        password: '',
+        confirm_password: '',
+
+        token_value : '',
+        token_value1: ''
       }
 
-      constructor(private auth : AuthenticationService, private router : Router ) { }
+      get reset_token_value(){
+        const token_val = this.route.snapshot.paramMap.get('token')
+        console.log(token_val, "---------------->")
+        return this.route.snapshot.paramMap.get('token')
+      }
 
-      reset_password() {
-          this.auth.reset_password(this.credentials).subscribe(
-              response => {
-                  console.log(response["message"])
-                  // alert(response)
+      constructor(private auth : AuthenticationService, private router : Router, public route: ActivatedRoute ) { }
 
-                  // alert("User"+ " " + this.credentials.username + " " +  "has registered")
-                  // this.router.navigateByUrl('/login')
-                  this.router.navigate(['/login']);  // define your component where you want to go
+        reset_password() {
+        // const token_value = this.route.snapshot.paramMap.get('token')
+        // console.log(token_value)
 
-              },
-              error => {
-                // console.error(error)
+        // const token_value1 = this.route.paramMap.pipe(map(paramMap => paramMap.get('token') ))
+        // console.log(token_value1)
 
-                console.error('error', error)
-                alert(error)
-              }
-          )
+        this.auth.reset_password(this.credentials).subscribe(
+        response => {
+        const token_value = this.route.snapshot.paramMap.get('token')
+        console.log(token_value)
+        });
+
+        error => {
+            // console.error(error)
+            console.error('error', error)
+            alert(error)
+          }
       }
 }
+//       constructor(private auth : AuthenticationService, private router : Router ) { }
 
+//       reset_password() {
+//           this.auth.reset_password(this.credentials).subscribe(
+//               response => {
+//                   console.log(response["message"])
+//                   // alert(response)
+//                   // this.router.navigateByUrl('/login')
+//                   this.router.navigate(['/login']);  // define your component where you want to go
+
+//               },
+//               error => {
+//                 // console.error(error)
+//                 console.log(this.credentials)
+//                 console.error('error', error)
+//                 alert(error)
+//               }
+//           )
+//       }
+// }
 
 

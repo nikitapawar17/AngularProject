@@ -9,15 +9,13 @@
             <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" class="form-control" name="new_pswd" placeholder="Enter password" [(ngModel)]="credentials.password">
+                <input type="password" class="form-control" name="new_pswd" placeholder="Enter password" [(ngModel)]="credentials.password">
             </div>
             <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <input type="password" class="form-control" name="confirm_pswd" placeholder="Enter password" [(ngModel)]="credentials.password">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" name="confirm_pswd" placeholder="Enter password" [(ngModel)]="credentials.confirm_password">
             </div>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Reset Password</button>
-        
-
             </form>
             </article>
         </div>

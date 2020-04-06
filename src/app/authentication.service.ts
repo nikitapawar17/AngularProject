@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {Observable, of} from 'rxjs'
 import {map} from 'rxjs/operators'
-import {Router} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
+import { environment } from '../environments/environment'
+
 
 export interface UserDetails {
     id: number;
@@ -10,7 +12,11 @@ export interface UserDetails {
     last_name: string,
     username: string,
     email: string,
-    password: string
+    password: string,
+    confirm_password: string,
+
+    token_value : string,
+    token_value1: string
 }
 
 interface TokenResponse{
@@ -23,19 +29,19 @@ export interface TokenPayload{
     last_name: string,
     username: string,
     email: string,
-    password: string
+    password: string, 
+    confirm_password: string,
+
+    token_value : string,
+    token_value1: string
 }
 
 @Injectable()
 export class AuthenticationService{
     private token: string
+    private reset_token: string
 
-    constructor(private http:HttpClient, private router:Router) {}
-
-    private saveToken(token: string) :void{
-        localStorage.setItem('usertoken', token)
-        this.token = token
-    }
+    constructor(private http:HttpClient, private router:Router, public route: ActivatedRoute) {}
 
     private getToken(): string {
         if(!this.token)
@@ -68,37 +74,16 @@ export class AuthenticationService{
       }
 
     public register(user : TokenPayload): Observable<any> {
-        const base = this.http.post('http://127.0.0.1:8000/users/register/', user)
 
-        const request = base.pipe(
-            map((data: TokenResponse) => {
-                if (data.token) {
-                    this.saveToken(data.token)
-                }
-                return data 
-            })
-        )
-        return request
+        return this.http.post(environment.base_url + "users/register/", user)
     }
 
-    public login(user : TokenPayload): Observable<any> {
-        const base = this.http.post('http://127.0.0.1:8000/users/login/', user)
-
-        const request = base.pipe(
-            map((data: TokenResponse) => {
-                if (data.token) {
-                    this.saveToken(data.token)
-                }
-                return data 
-            })
-        )
-        return request
+    public login(user : TokenPayload): Observable<any> { 
+        return this.http.post(environment.base_url + "users/login/", user)
     }
 
     public profile(user : TokenPayload): Observable<any> {
-        return this.http.get('http://127.0.0.1:8000/user_details/', {
-            headers: { Authorization: `${this.getToken()}` }
-        })
+        return this.http.get(environment.base_url + "user_details/")
     }
 
     public logout(): void{
@@ -107,36 +92,18 @@ export class AuthenticationService{
         this.router.navigateByUrl('/')
     }
 
-
     public forgot_password(user : TokenPayload): Observable<any> {
-        console.log(user)
-        const base = this.http.post('http://127.0.0.1:8000/forgot_password/', user)
-
-        const request = base.pipe(
-            map((data: TokenResponse) => {
-                if (data.token) {
-                    this.saveToken(data.token)
-                }
-                return data 
-            })
-        )
-        return request
+        return this.http.post(environment.base_url + "forgot_password/", user)
     }
 
 
     public reset_password(user : TokenPayload): Observable<any> {
-        console.log(user)
-        const base = this.http.post('http://127.0.0.1:8000/reset_password/', user)
+        // const token_value = url_obj.route.snapshot.paramMap.get('token')
+        // console.log(token_value)
+        // this.reset_token = this.reset_pswd_comp.reset_token_value
+        //  console.log("RESET PASSWORD", this.reset_token)
 
-        const request = base.pipe(
-            map((data: TokenResponse) => {
-                if (data.token) {
-                    this.saveToken(data.token)
-                }
-                return data 
-            })
-        )
-        return request
+        const base = this.http.post(environment.base_url + "reset_password/", user)
+        return this.http.post(environment.base_url + "reset_password/", user)
     }
-
-}
+} 

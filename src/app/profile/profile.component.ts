@@ -8,9 +8,31 @@ import { Router } from '@angular/router'
 export class ProfileComponent{
     details : UserDetails
 
-    constructor(private auth : AuthenticationService ) { }
+    // constructor(private auth : AuthenticationService ) { }
 
-    ngOnInit (){
-        this.details = this.auth.getUserDetails()
-    }
+    // ngOnInit (){
+    //     this.details = this.auth.getUserDetails()
+    // }
+
+
+
+
+
+      constructor(private auth : AuthenticationService, private router : Router ) { }
+
+      profile() {
+          this.auth.profile(this.details).subscribe(
+            response => {
+                console.log(response)
+                // alert(response["message"])
+                // alert("User" + " " + this.credentials.username + " " + "has logged in")
+                  this.router.navigateByUrl('/profile')
+              },
+              error => {
+                  console.error(error["error"])
+                //   console.error('error', error)
+                  alert(error["error"])
+              }
+          )
+      }
 }
