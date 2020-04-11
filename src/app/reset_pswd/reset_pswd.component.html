@@ -1,3 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample"
+      aria-expanded='false' aria-label="Toggle-Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collpse navbar-collapse justify-content-md-center" id="navbarsExample">
+      <ul class="navbar-nav">
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink='/'>Home</a>
+        </li>
+  
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink='/login'>Login</a>
+        </li>
+  
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink='/register'>Register</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  
 <div class="row justify-content-center" style="margin-top: 50px">
     <div class="col-sm-4">
         <div class="card">
@@ -5,17 +29,28 @@
                 <h4 class="card-title mt-2">Reset Password</h4>
             </header>
             <article class="card-body">
-            <form (submit)="reset_password()">
-            <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
+              <form [formGroup]="reset_pswd_form" (ngSubmit)="reset_password()">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name="new_pswd" placeholder="Enter password" [(ngModel)]="credentials.password">
+                <input type="password" formControlName="new_pswd" class="form-control" placeholder="Enter password" />
+            <div *ngIf="reset_pswd_form.controls.new_pswd.invalid && reset_pswd_form.controls.new_pswd.touched"
+              class="text-danger">
+              <small *ngIf="reset_pswd_form.controls.new_pswd.errors.required">Password is required.</small>
             </div>
+            </div>
+
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" class="form-control" name="confirm_pswd" placeholder="Enter password" [(ngModel)]="credentials.confirm_password">
+                <!-- <input type="password" class="form-control" name="confirm_pswd" placeholder="Enter password" [(ngModel)]="credentials.confirm_pswd"> -->
+                <input type="password" formControlName="confirm_pswd" class="form-control" placeholder="Enter confirm password"/>
+            <div *ngIf="reset_pswd_form.controls.confirm_pswd.invalid && reset_pswd_form.controls.confirm_pswd.touched"
+              class="text-danger">
+              <small *ngIf="reset_pswd_form.controls.confirm_pswd.errors.required">Confirm Password is required.</small>
+              <small *ngIf="reset_pswd_form.controls.confirm_pswd.errors.mustMatch">Password & Confirm Password must match.</small>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Reset Password</button>
+              </div>
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="reset_pswd_form.invalid">Reset Password</button>
             </form>
             </article>
         </div>

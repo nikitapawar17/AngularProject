@@ -19,7 +19,7 @@ export class ForgotPswdComponent{
         token_value1: ''
       }
 
-      constructor(private auth : AuthenticationService, private router : Router ) { }
+      constructor(public auth : AuthenticationService, private router : Router ) { }
 
       forgot_password() {
           this.auth.forgot_password(this.credentials).subscribe(

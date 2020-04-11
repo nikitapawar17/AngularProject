@@ -1,11 +1,14 @@
-import { Component } from '@angular/core'
-import { AuthenticationService, TokenPayload } from '../authentication.service'
-import { Router } from '@angular/router'
+import { Component } from '@angular/core';
+import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     templateUrl: './register.component.html'
 })
 export class RegisterComponent{
+    registerForm : FormGroup; 
+
     credentials: TokenPayload = {
         id: 0,
         first_name: '',
@@ -19,10 +22,22 @@ export class RegisterComponent{
         token_value1: ''
       }
 
-      constructor(private auth : AuthenticationService, private router : Router ) { }
+      constructor(public auth : AuthenticationService, private router : Router, private fb: FormBuilder) { 
+        this.createForm();
+      }
+
+      createForm(){
+       this.registerForm = this.fb.group({
+           first_name: ['', Validators.required],
+           last_name: ['', Validators.required],
+           email: ['', Validators.required],
+           username: ['', Validators.required],
+           password: ['', Validators.required]
+       });
+      }
 
       register() {
-          this.auth.register(this.credentials).subscribe(
+          this.auth.register(this.registerForm.value).subscribe(
               response => {
                   console.log(response["message"])
                   // alert(response)

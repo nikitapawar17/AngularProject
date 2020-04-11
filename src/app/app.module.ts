@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule, Component } from '@angular/core'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'  
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -14,7 +14,8 @@ import { ProfileComponent } from './profile/profile.component'
 import { HomeComponent } from './home/home.component'
 import { AuthenticationService } from './authentication.service'
 import { AuthGuardService } from './auth-guard.service';
-import { UsrInterceptorComponent } from './usr-interceptor/usr-interceptor.component'
+import { UsrInterceptorComponent } from './usr-interceptor/usr-interceptor.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 const routes : Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +27,9 @@ const routes : Routes = [
     path: 'profile', 
     component: ProfileComponent,
     canActivate: [AuthGuardService]
-  }
+  },
+  { path: 'dashboard',
+   component: DashboardComponent}
 ]
 
 
@@ -38,12 +41,14 @@ const routes : Routes = [
     RegisterComponent,
     ProfileComponent,
     ForgotPswdComponent, 
-    ResetPswdComponent
+    ResetPswdComponent, 
+    DashboardComponent
     // UsrInterceptorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule. forRoot(routes)
   ],

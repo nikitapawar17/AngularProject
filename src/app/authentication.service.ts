@@ -36,6 +36,12 @@ export interface TokenPayload{
     token_value1: string
 }
 
+export interface TokenPayload1{
+    new_pswd: string,
+    confirm_pswd: string
+
+}
+
 @Injectable()
 export class AuthenticationService{
     private token: string
@@ -46,13 +52,13 @@ export class AuthenticationService{
     private getToken(): string {
         if(!this.token)
         {
-            this.token = localStorage.getItem('usertoken')
+            this.token = localStorage.getItem('token')
         }
         return this.token
     }
 
     public getUserDetails(): UserDetails {
-        const token = this.getToken()
+        const token = localStorage.getItem('token')
         let payload 
         if (token)
         {
@@ -62,6 +68,7 @@ export class AuthenticationService{
         } else{
             return null
         }
+
     }
 
     public isLoggedIn(): boolean {
@@ -74,21 +81,28 @@ export class AuthenticationService{
       }
 
     public register(user : TokenPayload): Observable<any> {
-
         return this.http.post(environment.base_url + "users/register/", user)
     }
 
     public login(user : TokenPayload): Observable<any> { 
         return this.http.post(environment.base_url + "users/login/", user)
+        .pipe(map(user_data =>{
+            if (user_data && user_data["data"])
+            {
+                console.log(user_data)
+                localStorage.setItem('currentUser', JSON.stringify(user_data))
+            }
+            return user_data;
+        }));
     }
 
-    public profile(user : TokenPayload): Observable<any> {
-        return this.http.get(environment.base_url + "user_details/")
-    }
+    // public dashboard(user : TokenPayload): Observable<any> {
+    //     return this.http.get(environment.base_url + "user_details/")
+    // }
 
     public logout(): void{
         this.token = ''
-        window.localStorage.removeItem('usertoken')
+        window.localStorage.removeItem('token')
         this.router.navigateByUrl('/')
     }
 
@@ -97,13 +111,9 @@ export class AuthenticationService{
     }
 
 
-    public reset_password(user : TokenPayload): Observable<any> {
-        // const token_value = url_obj.route.snapshot.paramMap.get('token')
-        // console.log(token_value)
-        // this.reset_token = this.reset_pswd_comp.reset_token_value
-        //  console.log("RESET PASSWORD", this.reset_token)
-
-        const base = this.http.post(environment.base_url + "reset_password/", user)
-        return this.http.post(environment.base_url + "reset_password/", user)
+    public reset_password(user1 : TokenPayload1): Observable<any> {
+        const auth_token = localStorage.getItem("access_token")
+        console.log(auth_token, "------->")
+        return this.http.post(environment.base_url + "reset_password/" + auth_token, user1)
     }
 } 

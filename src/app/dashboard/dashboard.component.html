@@ -1,0 +1,55 @@
+ <!-- <h1>Hi {{currentUser["name"]}}!</h1>
+<p>You're logged in with Angular 6!!</p>
+<h3>All registered users:</h3>
+<ul>
+    <li *ngFor="let user of users">
+        {{user.username}} ({{user.firstName}} {{user.lastName}})
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Logout</a></p>   -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample"
+    aria-expanded='false' aria-label="Toggle-Navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collpse navbar-collapse justify-content-md-center" id="navbarsExample">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/'>Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink='' (click)="auth.logout()">Logout</a>
+      </li>  
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+    <div class="jumbotron mt-4">
+      <h5 class="text-center">Hi {{currentUser["name"]}}! You have log-in successfully.</h5> 
+      <!-- <div class="col-sm-4 mx-auto"> -->
+        <h3 class="text-center">PROFILE</h3>
+      <!-- </div> -->
+        <table class="table col-md-6 mx-auto">
+        <tr>
+          <td>First Name</td>
+          <td>{{ currentUser["first_name"]}}</td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>{{currentUser["last_name"]}}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{currentUser["email"]}}</td>
+        </tr>
+        <tr>
+            <td>User Name</td>
+            <td>{{currentUser["name"]}}</td>
+          </tr>
+      </table>
+    </div>
+  </div> 

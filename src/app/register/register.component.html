@@ -1,37 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample"
+    aria-controls="navbarsExample" aria-expanded='false' aria-label="Toggle-Navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collpse navbar-collapse justify-content-md-center" id="navbarsExample">
+    <ul class="navbar-nav">
+      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink='/'>Home</a>
+      </li>
+
+      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink='/login'>Login</a>
+      </li>
+
+      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink='/register'>Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
 <div class="row justify-content-center" style="margin-top: 50px">
-    <div class="col-sm-4">
-        <div class="card">
-            <header class="card-header">
-                <h4 class="card-title mt-2">Register</h4>
-            </header>
-            <article class="card-body">
-            <form (submit)="register()">
-            <!-- <h1 class="h3 mb-3 font-weight-normal">Register</h1> -->
-            <div class="form-row">
-                <div class="col form-group">
-                <label for="name">First Name</label>
-                <input type="text" class="form-control" name="first_name" placeholder="Enter your firstname" [(ngModel)]="credentials.first_name">
-            </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <header class="card-header">
+        <h4 class="card-title mt-2">Register</h4>
+      </header>
+      <article class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+          <div class="form-row">
             <div class="col form-group">
-                <label for="name">Last Name</label>
-                <input type="text" class="form-control" name="last_name" placeholder="Enter your lastname" [(ngModel)]="credentials.last_name">
+              <label for="name">First Name</label>
+              <!-- <input type="text" class="form-control" name="first_name" placeholder="Enter your firstname" [(ngModel)]="credentials.first_name"> -->
+              <input type="text" formControlName="first_name" class="form-control" placeholder="Enter first_name" />
+              <div *ngIf="registerForm.controls.first_name.invalid && registerForm.controls.first_name.touched"
+                class="text-danger">
+                <small *ngIf="registerForm.controls.first_name.errors.required">Firstname is required.</small>
+              </div>
             </div>
+
+            <div class="col form-group">
+              <label for="name">Last Name</label>
+              <!-- <input type="text" class="form-control" name="last_name" placeholder="Enter your lastname" [(ngModel)]="credentials.last_name"> -->
+              <input type="text" formControlName="last_name" class="form-control" placeholder="Enter last_name" />
+              <div *ngIf="registerForm.controls.last_name.invalid && registerForm.controls.last_name.touched"
+                class="text-danger">
+                <small *ngIf="registerForm.controls.last_name.errors.required">Lastname is required.</small>
+              </div>
             </div>
-            <div class="form-group">
-                <label for="username">User Name</label>
-                <input type="text" class="form-control" name="username" placeholder="Enter your username" [(ngModel)]="credentials.username">
+          </div>
+
+          <div class="form-group">
+            <label for="username">UserName</label>
+            <input type="text" formControlName="username" class="form-control" placeholder="Enter username" />
+            <div *ngIf="registerForm.controls.username.invalid && registerForm.controls.username.touched"
+              class="text-danger">
+              <small *ngIf="registerForm.controls.username.errors.required">Username is required.</small>
             </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" name="email" placeholder="Enter your email ddress" [(ngModel)]="credentials.email">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <!-- <input type="email" class="form-control" name="email" placeholder="Enter your email ddress" [(ngModel)]="credentials.email"> -->
+            <input type="email" formControlName="email" class="form-control" placeholder="Enter email" />
+            <div *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched" class="text-danger">
+              <small *ngIf="registerForm.controls.email.errors.required">Email address is required.</small>
+              <small *ngIf="registerForm.controls.email.errors.email">Email must be a valid email address.</small>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="credentials.password">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control" placeholder="Enter password" />
+            <div *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.touched"
+              class="text-danger">
+              <small *ngIf="registerForm.controls.password.errors.required">Password is required.</small>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
-            </form>
-            </article>
-        </div>
+          </div>
+          
+          <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="registerForm.invalid">Register</button>
+        </form>
+      </article>
     </div>
+  </div>
 </div>
