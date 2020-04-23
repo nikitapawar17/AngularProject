@@ -1,11 +1,15 @@
-import { Component } from '@angular/core'
-import { AuthenticationService, TokenPayload } from '../authentication.service'
-import { Router } from '@angular/router'
+import { Component } from '@angular/core';
+import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-    templateUrl: './forgot_pswd.component.html'
-})
+    selector: 'app-forgot_pswd',
+    templateUrl: './forgot_pswd.component.html',
+    styleUrls: ['./forgot_pswd.component.scss']})
+
 export class ForgotPswdComponent{
+    forgot_pswd_form : FormGroup;
     credentials: TokenPayload = {
         id: 0,
         first_name: '',
@@ -19,19 +23,24 @@ export class ForgotPswdComponent{
         token_value1: ''
       }
 
-      constructor(public auth : AuthenticationService, private router : Router ) { }
+      constructor(public auth : AuthenticationService, private router : Router, private fb: FormBuilder) {
+        this.createForm();
+       }
+
+       createForm(){
+        this.forgot_pswd_form = this.fb.group({
+            email: ['', Validators.required]
+        });
+       }
 
       forgot_password() {
-          this.auth.forgot_password(this.credentials).subscribe(
+          this.auth.forgot_password(this.forgot_pswd_form.value).subscribe(
             response => {
                 console.log(response["message"])
                 alert(response["message"])
-                // alert("User" + " " + this.credentials.username + " " + "has logged in")
-                //   this.router.navigate(['/profile'])
               },
               error => {
                   console.error(error["error"]["message"])
-                //   console.error('error', error)
                   alert(error["error"]["message"])
               }
           )

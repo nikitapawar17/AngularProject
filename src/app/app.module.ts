@@ -1,33 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser'
-import { NgModule, Component } from '@angular/core'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'  
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms'
-import { RouterModule, Routes } from '@angular/router'
+import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgModule, Component } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';  
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { LoginComponent } from './login/login.component'
-import { RegisterComponent } from './register/register.component'
-import { ForgotPswdComponent } from './forgot_pswd/forgot_pswd.component'
-import { ResetPswdComponent } from './reset_pswd/reset_pswd.component'
-import { ProfileComponent } from './profile/profile.component'
-import { HomeComponent } from './home/home.component'
-import { AuthenticationService } from './authentication.service'
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPswdComponent } from './forgot_pswd/forgot_pswd.component';
+import { ResetPswdComponent } from './reset_pswd/reset_pswd.component';
+import { HomeComponent } from './home/home.component';
+import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { UsrInterceptorComponent } from './usr-interceptor/usr-interceptor.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService} from './alert.service';
+
+import { MaterialModule } from './material.module';
 
 const routes : Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'forgot_password', component: ForgotPswdComponent},
   { path: 'reset_password/:token', component: ResetPswdComponent},
-  {
-    path: 'profile', 
-    component: ProfileComponent,
-    canActivate: [AuthGuardService]
-  },
   { path: 'dashboard',
    component: DashboardComponent}
 ]
@@ -39,10 +38,10 @@ const routes : Routes = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent,
     ForgotPswdComponent, 
     ResetPswdComponent, 
-    DashboardComponent
+    DashboardComponent, 
+    AlertComponent
     // UsrInterceptorComponent
   ],
   imports: [
@@ -50,8 +49,9 @@ const routes : Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule. forRoot(routes)
-  ],
+    RouterModule. forRoot(routes),
+    MaterialModule
+    ],
   // providers: [AuthenticationService, AuthGuardService],
   // providers: [AuthenticationService, AuthGuardService, ResetPswdComponent],
   providers:  [
@@ -68,6 +68,9 @@ const routes : Routes = [
     },
     {
       provide: ResetPswdComponent
+    },
+    {
+      provide: AlertService
     }
   ],
 

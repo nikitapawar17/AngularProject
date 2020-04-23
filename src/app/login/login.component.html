@@ -1,64 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample"
-      aria-expanded='false' aria-label="Toggle-Navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collpse navbar-collapse justify-content-md-center" id="navbarsExample">
-      <ul class="navbar-nav">
-        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink='/'>Home</a>
-        </li>
-  
-        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink='/login'>Login</a>
-        </li>
-  
-        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink='/register'>Register</a>
-        </li>
-  
-      </ul>
-    </div>
-  </nav>
-  
-  
-<div class="row justify-content-center" style="margin-top: 50px">
-    <div class="col-sm-4">
-        <div class="card">
-            <header class="card-header">
-                <h4 class="card-title mt-2">Login</h4>
-            </header>
-            <article class="card-body">
-            <form [formGroup]="loginForm" (ngSubmit)="login()">
-
-            <!-- <form (submit)="login()"> -->
-            <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
-            <div class="form-group">
-                <label for="username">UserName</label>
-                <!-- <input type="text" class="form-control" name="username" placeholder="Enter username" [(ngModel)]="credentials.username"> -->
-              
-              <input type="text" formControlName="username" class="form-control" placeholder="Enter username"/>
-              <div *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched" class="text-danger">
-                <small *ngIf="loginForm.controls.username.errors.required">Username is required.</small>
-              </div>
-          </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <!-- <input type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="credentials.password"> -->
-                <input type="password" formControlName="password" class="form-control" placeholder="Enter password"/>
-              <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" class="text-danger">
-                <small *ngIf="loginForm.controls.password.errors.required">Password is required.</small>
-              </div>
-          </div>
-
-            <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
-            <a class="nav-link" routerLink='/forgot_password'
-             style="text-align: right;">Forgot Password ? Click Here</a>
-
-            </form>
-            </article>
+<mat-card class="container">
+ 
+  <form [formGroup]="loginForm">
+     <div class="subContainer">
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-header class="tab">
+                <mat-card-title>SIGN IN</mat-card-title>       
+            </mat-card-header>
         </div>
+    
+        <div class="tab">
+            <div class="example-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Username" [formControl]="loginForm.get('username')" class="form-control"/>
+
+                        <mat-error *ngIf="loginForm.get('username')">
+                            Please provide Username.
+                        </mat-error>                 
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">            
+                    <mat-label>Password</mat-label>                    
+                    <input matInput placeholder="Password" minlength ="8" [type]="hide ? 'password' : 'text'" [formControl]= "loginForm.get('password')" class="form-control" />
+                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                        Please provide password.
+                     </mat-error>
+                     <mat-error *ngIf="loginForm.get('Password')">
+                        Password must be 8-15 characters long 
+                     </mat-error>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>                                                         
+                </mat-form-field>
+            </div>
+       </div>
+
+       <div class="tab" >
+        <div class="example-button-row1">
+          <a mat-button routerLink="/forgot_password">Forgot Password?</a> 
+        </div>
+       </div>
+
+       <div class="tab">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)= login()>Sign In</button>  
+            Don't have an account ? <a mat-flat-button routerLink="/register">Sign Up Here</a>
+            </div>
+       </div>
     </div>
-</div>
+</form>
+</mat-card>
+

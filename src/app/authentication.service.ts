@@ -81,24 +81,22 @@ export class AuthenticationService{
       }
 
     public register(user : TokenPayload): Observable<any> {
-        return this.http.post(environment.base_url + "users/register/", user)
+        const endpoint_url = "users/register/"
+        return this.http.post(environment.base_url + endpoint_url, user)
     }
 
     public login(user : TokenPayload): Observable<any> { 
-        return this.http.post(environment.base_url + "users/login/", user)
+        const endpoint_url = "users/login/"
+        return this.http.post(environment.base_url + endpoint_url, user)
         .pipe(map(user_data =>{
             if (user_data && user_data["data"])
             {
-                console.log(user_data)
-                localStorage.setItem('currentUser', JSON.stringify(user_data))
+                console.log(user_data["data"][0]["token"])
+                localStorage.setItem('currentUser', user_data["data"][0]["token"])
             }
             return user_data;
         }));
     }
-
-    // public dashboard(user : TokenPayload): Observable<any> {
-    //     return this.http.get(environment.base_url + "user_details/")
-    // }
 
     public logout(): void{
         this.token = ''
@@ -107,13 +105,15 @@ export class AuthenticationService{
     }
 
     public forgot_password(user : TokenPayload): Observable<any> {
-        return this.http.post(environment.base_url + "forgot_password/", user)
+        const endpoint_url = "forgot_password/"
+        return this.http.post(environment.base_url + endpoint_url, user)
     }
 
 
     public reset_password(user1 : TokenPayload1): Observable<any> {
+        const endpoint_url = "reset_password/"
         const auth_token = localStorage.getItem("access_token")
         console.log(auth_token, "------->")
-        return this.http.post(environment.base_url + "reset_password/" + auth_token, user1)
+        return this.http.post(environment.base_url + endpoint_url + auth_token, user1)
     }
 } 

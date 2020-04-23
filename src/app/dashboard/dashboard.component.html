@@ -7,7 +7,7 @@
     </li>
 </ul>
 <p><a [routerLink]="['/login']">Logout</a></p>   -->
-
+<!-- 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample"
     aria-expanded='false' aria-label="Toggle-Navigation">
@@ -30,9 +30,7 @@
 <div class="container">
     <div class="jumbotron mt-4">
       <h5 class="text-center">Hi {{currentUser["name"]}}! You have log-in successfully.</h5> 
-      <!-- <div class="col-sm-4 mx-auto"> -->
         <h3 class="text-center">PROFILE</h3>
-      <!-- </div> -->
         <table class="table col-md-6 mx-auto">
         <tr>
           <td>First Name</td>
@@ -52,4 +50,19 @@
           </tr>
       </table>
     </div>
-  </div> 
+  </div>  -->
+
+  <mat-card class="container">
+         <div fxLayout="column" fxLayoutAlign="center center">
+             <!-- <mat-card-header class="tab"> -->
+                 <h2>Hi {{currentUser["name"]}}!</h2>       
+             <!-- </mat-card-header> -->
+         </div>
+    <p>You have logged in with Fundoo.</p> 
+
+    <!-- <a [routerLink]="['/login']">Logout</a> -->
+
+    <a class="nav-link" routerLink='' (click)="auth.logout()">Logout</a>
+
+  </mat-card>
+  

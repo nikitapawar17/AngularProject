@@ -7,10 +7,15 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Route } from '@angular/compiler/src/core';
 
 @Component({
-    templateUrl: './reset_pswd.component.html'
+    selector: 'app-reset_pswd',
+    templateUrl: './reset_pswd.component.html',
+    styleUrls: ['./reset_pswd.component.scss']
+
 })
 export class ResetPswdComponent{
-    reset_pswd_form: FormGroup;
+  hide=true
+  reset_pswd_form:FormGroup
+  submitted = false;
 
     credentials: TokenPayload1 = {
         new_pswd: '',

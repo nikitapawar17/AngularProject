@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample"
       aria-expanded='false' aria-label="Toggle-Navigation">
       <span class="navbar-toggler-icon"></span>
@@ -41,8 +41,7 @@
 
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <!-- <input type="password" class="form-control" name="confirm_pswd" placeholder="Enter password" [(ngModel)]="credentials.confirm_pswd"> -->
-                <input type="password" formControlName="confirm_pswd" class="form-control" placeholder="Enter confirm password"/>
+/                <input type="password" formControlName="confirm_pswd" class="form-control" placeholder="Enter confirm password"/>
             <div *ngIf="reset_pswd_form.controls.confirm_pswd.invalid && reset_pswd_form.controls.confirm_pswd.touched"
               class="text-danger">
               <small *ngIf="reset_pswd_form.controls.confirm_pswd.errors.required">Confirm Password is required.</small>
@@ -55,4 +54,46 @@
             </article>
         </div>
     </div>
-</div>
+</div> -->
+
+<mat-card class="container">
+ 
+  <form [formGroup]="reset_pswd_form">
+     <div class="subContainer">
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-header class="tab">
+                <mat-card-title>Reset Password</mat-card-title>       
+            </mat-card-header>
+        </div>
+    
+        <div class="tab">
+            <div class="example-container">
+              <mat-form-field appearance="outline">            
+                <mat-label>Password</mat-label>                    
+                <input matInput placeholder="Password" minlength ="8" [type]="hide ? 'password' : 'text'" [formControl]= "reset_pswd_form.get('new_pswd')" class="form-control" />
+                <mat-error *ngIf="reset_pswd_form.get('new_pswd').hasError('required')">
+                    Please provide password.
+                 </mat-error>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>                                                         
+            </mat-form-field>
+
+
+                <mat-form-field appearance="outline">            
+                    <mat-label>Confirm Password</mat-label>                    
+                    <input matInput placeholder="Confirm Password" minlength ="8" [type]="hide ? 'password' : 'text'" [formControl]= "reset_pswd_form.get('confirm_pswd')" class="form-control" />
+                    <mat-error *ngIf="reset_pswd_form.get('confirm_pswd').hasError('required')">
+                        Please provide password to confirm.
+                     </mat-error>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>                                                         
+                </mat-form-field>
+            </div>
+       </div>
+
+       <div class="tab">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)= reset_password()>Reset Password</button>  
+            </div>
+       </div>
+    </div>
+</form>
+</mat-card>

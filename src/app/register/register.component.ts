@@ -4,10 +4,15 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-    templateUrl: './register.component.html'
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent{
-    registerForm : FormGroup; 
+  hide=true
+  registerForm:FormGroup
+  submitted = false;
 
     credentials: TokenPayload = {
         id: 0,
@@ -39,19 +44,13 @@ export class RegisterComponent{
       register() {
           this.auth.register(this.registerForm.value).subscribe(
               response => {
-                  console.log(response["message"])
-                  // alert(response)
-
-                  // alert("User"+ " " + this.credentials.username + " " +  "has registered")
-                  // this.router.navigateByUrl('/login')
-                  this.router.navigate(['/login']);  // define your component where you want to go
-
+                console.log(response["message"])
+                this.router.navigate(['/login']);  // define your component where you want to go
               },
               error => {
-                // console.error(error)
-
                 console.error('error', error)
                 alert(error)
+                
               }
           )
       }

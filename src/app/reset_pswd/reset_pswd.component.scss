@@ -1,0 +1,52 @@
+.container{
+    width: 400px;
+    height: 320px;
+    margin-top: 100px;
+    margin-left: 430px;
+    margin-right: 350px;
+    border-width: 2px;
+    border-style: groove;
+    border-style: groove;
+
+    border-color: slateblue;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+  }
+.tab{
+    padding-left: 20px;
+   padding-right: 20px; 
+   padding-top:2px; 
+}
+.subContainer{
+    width: 400px;
+    height: 390px;
+    // margin-left: 10px;
+    margin-top: 20px;
+    // padding: 30px;
+    /* background-color : blanchedalmond; */
+}
+.example-container {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .example-button-row1{
+    float: right;
+  }
+
+  .example-button-row button{
+  width: 360px;
+  height: 50px;
+  padding-right: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  box-shadow: none;
+  }
+

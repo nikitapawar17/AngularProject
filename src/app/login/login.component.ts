@@ -4,10 +4,15 @@ import { Router } from '@angular/router';
 import { FormsModule, FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 @Component({
-    templateUrl: './login.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent{
-    loginForm : FormGroup;
+    hide=true
+    loginForm:FormGroup
+    submitted = false;
 
     credentials: TokenPayload = {
         id: 0,
@@ -25,40 +30,22 @@ export class LoginComponent{
       constructor(public auth : AuthenticationService, private router : Router, private fb: FormBuilder) {
           this.createForm();
        }
-
-    //   _formValidate() {
-    //     // Here we have used a form builder and an array to allow for multiple validation rules on a form.
-    //     this.loginForm = this.fb.group(
-    //       {
-    //         username: ['', Validators.required ],
-    //         password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-    //       }
-    //     );
-    //   }
      
        createForm() {
         this.loginForm = this.fb.group({
           username: ['', Validators.required],
-          password: ['', Validators.required]
+          password:['', [Validators.required, Validators.minLength(8)]]
         });
     }
-      // To initialize the form group and validations in the 'ngOnInit' lifecycle hook.
-    //   ngOnInit() {
-    //     this._formValidate();
-    //   }
-
 
       login() {
           this.auth.login(this.loginForm.value).subscribe(
             response => {
                 console.log(response["message"])
-                // alert(response["message"])
-                // alert("User" + " " + this.credentials.username + " " + "has logged in")
-                  this.router.navigate(['/dashboard'])
+                this.router.navigate(['/dashboard'])
               },
               error => {
                   console.error(error["error"]["message"])
-                //   console.error('error', error)
                   alert(error["error"]["message"])
               }
           )
