@@ -12,7 +12,7 @@
             <div class="example-container">
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
-                    <input matInput placeholder="Username" [formControl]="loginForm.get('username')" class="form-control"/>
+                    <input matInput id="username" placeholder="Username" [formControl]="loginForm.get('username')" class="form-control"/>
 
                         <mat-error *ngIf="loginForm.get('username')">
                             Please provide Username.
@@ -22,7 +22,7 @@
 
                 <mat-form-field appearance="outline">            
                     <mat-label>Password</mat-label>                    
-                    <input matInput placeholder="Password" minlength ="8" [type]="hide ? 'password' : 'text'" [formControl]= "loginForm.get('password')" class="form-control" />
+                    <input matInput id="password" placeholder="Password" minlength ="8" [type]="hide ? 'password' : 'text'" [formControl]= "loginForm.get('password')" class="form-control" />
                     <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Please provide password.
                      </mat-error>
@@ -42,7 +42,7 @@
 
        <div class="tab">
           <div class="example-button-row">
-            <button mat-raised-button color="primary" (click)= login()>Sign In</button>  
+            <button mat-raised-button color="primary" id="loginButton" (click)= login()>Sign In</button>  
             Don't have an account ? <a mat-flat-button routerLink="/register">Sign Up Here</a>
             </div>
        </div>

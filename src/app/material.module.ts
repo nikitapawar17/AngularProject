@@ -1,67 +1,64 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA}  from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import { FormsModule } from '@angular/forms';
-import {MatMenuModule} from '@angular/material/menu';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA }  from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatTableModule } from "@angular/material/table";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 @NgModule({
     
   imports: [
       CommonModule, 
-      MatProgressSpinnerModule,
-      MatDialogModule,
-      MatTableModule,
       MatFormFieldModule,
       MatInputModule,
       MatButtonToggleModule,
       MatButtonModule,
-      MatIconModule,
+      MatMenuModule,
       MatCardModule,
-      ReactiveFormsModule,
+      MatIconModule,
       MatSnackBarModule,
       MatToolbarModule,
-      MatSidenavModule,
       MatListModule,
+      MatSidenavModule,
+      ReactiveFormsModule,
       FormsModule,
-      MatMenuModule,
       BrowserAnimationsModule, 
-      FlexLayoutModule
+      FlexLayoutModule,
+      MatTooltipModule,
+      MatChipsModule
   ],
   exports:[
       CommonModule, 
-      MatProgressSpinnerModule,
-      MatDialogModule,
-      MatTableModule,
       MatFormFieldModule,
       MatInputModule,
       MatButtonToggleModule,
       MatButtonModule,
-      MatIconModule,
+      MatMenuModule,
       MatCardModule,
-      ReactiveFormsModule,
+      MatIconModule,
       MatSnackBarModule,
+      MatListModule,
       MatToolbarModule,
       MatSidenavModule,
-      MatListModule,
+      ReactiveFormsModule,
       FormsModule,
-      MatMenuModule,
       BrowserAnimationsModule,
-      FlexLayoutModule
+      FlexLayoutModule,
+      MatTooltipModule,
+      MatChipsModule
   ],
   providers: [],
   schemas: [

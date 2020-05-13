@@ -1,0 +1,86 @@
+.main
+{
+    display: flex;
+    width:100%;
+}
+
+.buttons:hover
+{
+    background-color: rgb(223, 222, 209);
+}
+
+.colorMenu
+{
+    width: 150px;
+    height: 100px;
+    padding-left: 5px;
+}
+.fabButton{
+    width: 28px;
+    height: 28px; 
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.example-trigger {
+    display: inline-block;
+  }
+.title
+{
+    width: 100%;
+    border-bottom: 2px inset;
+}
+.arrowIcon
+{
+    padding-left: 10px;
+    width: 30px;
+}
+.calendarOption
+{
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.owlCalendar
+{
+    border-bottom: 2px inset;
+    width: 100%;
+    margin-top: 10px;
+    height: 30px;
+}
+.menuBtn
+{
+    border-bottom: 2px inset;
+    width: 100%;
+    margin-top: 10px;
+    height: 40px;
+}
+.saveBtn
+{
+    padding-right: 20px; 
+    margin-top: 10px;
+}
+.mainReminderLabel
+{
+    width: 100%;
+    border-bottom: 2px inset;
+    font-size: 16px; 
+    height: 40px; 
+    padding-left: 15px;
+}
+.menudiv
+{
+    width: 250px;
+}
+.IconOptions
+{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.trashIcons
+{
+    width:250px;
+    height: 35px;
+    margin-right: 20px; 
+}
+
+

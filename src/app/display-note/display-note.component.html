@@ -1,0 +1,35 @@
+    <div  *ngIf ="childMessage.length > 0 " class="main" fxLayoutAlign="center center" fxFlex="90">
+    
+        <mat-card fxFlex.xs = "100" *ngFor= " let note of childMessage.reverse()" style="padding-top: 10px;
+        padding-bottom: 10px; padding-right: 10px; padding-left: 10px; width: 200px; height: 102px; margin-right: 20px;"> 
+            <div class ="titletext" fxLayout="row" fxLayoutAlign="space-between center">  
+                <label class = "titleLabel">{{ note['title'] }} </label>
+    
+                <div fxLayoutAlign="end center" fxLayout="row" class="pin">
+                    <!-- <button mat-icon-button fxLayoutAlign="center center">
+                       <img src = "/assets/images/pin.svg" *ngIf="!note.is_pin" matTooltip = "Pin Note" class="pinImg">
+                    </button>  -->
+                    <!-- <button mat-icon-button  fxLayoutAlign="center center">
+                      <img src = "/assets/images/pin2.png" *ngIf="note.is_pin"  matTooltip = "Unpin Note" class="pinImg">
+                    </button>  -->
+                </div>
+            </div>
+            
+            <div class ="titletext" fxLayout="row" fxLayoutAlign="space-between center">
+                {{ note['description'] }}
+            </div>
+        
+                   
+                <div class = "iconsDiv" fxLayoutAlign = "start center" fxLayout = "row">
+                    <span class="icons" fxLayoutAlign = "start center" fxLayout = "row">
+                        <!-- <app-icon ></app-icon>      -->
+                    </span>
+                </div>
+        </mat-card>    
+    </div>
+   
+    <div *ngIf= "childMessage.length == 0">
+            <label fxLayoutAlign= "center center" class="emptyMessage">
+                Notes not Available
+            </label>
+    </div>

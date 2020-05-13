@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule, FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 @Component({
@@ -27,7 +28,7 @@ export class LoginComponent{
         token_value1: ''
       }
 
-      constructor(public auth : AuthenticationService, private router : Router, private fb: FormBuilder) {
+      constructor(public auth_service : AuthenticationService, private router : Router, private fb: FormBuilder, private snackbar: MatSnackBar) {
           this.createForm();
        }
      
@@ -39,14 +40,23 @@ export class LoginComponent{
     }
 
       login() {
-          this.auth.login(this.loginForm.value).subscribe(
+          this.auth_service.login(this.loginForm.value).subscribe(
             response => {
                 console.log(response["message"])
+                this.snackbar.open(response["message"], '',{
+                  duration:2000,
+                  verticalPosition: 'top',
+                  horizontalPosition:'center'});
                 this.router.navigate(['/dashboard'])
+                this.loginForm.reset();
               },
               error => {
                   console.error(error["error"]["message"])
-                  alert(error["error"]["message"])
+                  // alert(error["error"]["message"])
+                  this.snackbar.open(error["error"]["message"], '',{
+                    duration:2000,
+                    verticalPosition: 'top',
+                    horizontalPosition:'center'});
               }
           )
       }

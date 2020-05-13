@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
     selector: 'app-forgot_pswd',
@@ -23,7 +25,7 @@ export class ForgotPswdComponent{
         token_value1: ''
       }
 
-      constructor(public auth : AuthenticationService, private router : Router, private fb: FormBuilder) {
+      constructor(public auth_service : AuthenticationService, private router : Router, private fb: FormBuilder, private snackbar: MatSnackBar) {
         this.createForm();
        }
 
@@ -34,14 +36,26 @@ export class ForgotPswdComponent{
        }
 
       forgot_password() {
-          this.auth.forgot_password(this.forgot_pswd_form.value).subscribe(
+
+
+          this.auth_service.forgot_password(this.forgot_pswd_form.value).subscribe(
             response => {
                 console.log(response["message"])
-                alert(response["message"])
+                // alert(response["message"])
+                this.snackbar.open(response["message"], '',{
+                    duration:2000,
+                    verticalPosition: 'top',
+                    horizontalPosition:'center'});
+                this.forgot_pswd_form.reset();
               },
               error => {
                   console.error(error["error"]["message"])
-                  alert(error["error"]["message"])
+                //   alert(error["error"]["message"])
+                this.snackbar.open(error["error"]["message"], '',{
+                    duration:2000,
+                    verticalPosition: 'top',
+                    horizontalPosition:'center'});
+
               }
           )
       }

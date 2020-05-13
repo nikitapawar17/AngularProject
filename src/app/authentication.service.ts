@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
-import {Observable, of} from 'rxjs'
-import {map} from 'rxjs/operators'
-import {Router, ActivatedRoute} from '@angular/router'
-import { environment } from '../environments/environment'
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {Router, ActivatedRoute} from '@angular/router';
+import { environment } from '../environments/environment';
 
 
 export interface UserDetails {
@@ -39,7 +39,12 @@ export interface TokenPayload{
 export interface TokenPayload1{
     new_pswd: string,
     confirm_pswd: string
+}
 
+export interface NoteInfo{
+    title: string,
+    description: string,
+    is_pin: boolean
 }
 
 @Injectable()
@@ -81,39 +86,36 @@ export class AuthenticationService{
       }
 
     public register(user : TokenPayload): Observable<any> {
-        const endpoint_url = "users/register/"
+        const endpoint_url = "user/register/"
         return this.http.post(environment.base_url + endpoint_url, user)
     }
 
     public login(user : TokenPayload): Observable<any> { 
-        const endpoint_url = "users/login/"
+        const endpoint_url = "user/login/"
         return this.http.post(environment.base_url + endpoint_url, user)
         .pipe(map(user_data =>{
             if (user_data && user_data["data"])
             {
                 console.log(user_data["data"][0]["token"])
-                localStorage.setItem('currentUser', user_data["data"][0]["token"])
+                localStorage.setItem('token', user_data["data"][0]["token"])
             }
             return user_data;
         }));
     }
 
-    public logout(): void{
-        this.token = ''
-        window.localStorage.removeItem('token')
-        this.router.navigateByUrl('/')
-    }
+
 
     public forgot_password(user : TokenPayload): Observable<any> {
-        const endpoint_url = "forgot_password/"
+        const endpoint_url = "user/forgot_password/"
         return this.http.post(environment.base_url + endpoint_url, user)
     }
 
 
     public reset_password(user1 : TokenPayload1): Observable<any> {
-        const endpoint_url = "reset_password/"
+        const endpoint_url = "user/reset_password/"
         const auth_token = localStorage.getItem("access_token")
-        console.log(auth_token, "------->")
         return this.http.post(environment.base_url + endpoint_url + auth_token, user1)
     }
+
+    
 } 

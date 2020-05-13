@@ -23,7 +23,7 @@ export class UsrInterceptorComponent implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     //how to update the request Parameters
     const updatedRequest = request.clone({
-      headers: request.headers.set("Authorization", localStorage.getItem('currentUser'))
+      headers: request.headers.set("Authorization", localStorage.getItem('token'))
     });
     //logging the updated Parameters to browser's console
     console.log("Before making api call : ", updatedRequest);

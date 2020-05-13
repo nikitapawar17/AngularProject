@@ -1,34 +1,85 @@
-.container{
-    width: 350px;
-    height: 200px;
-    margin-top: 100px;
-    margin-left: 430px;
-    margin-right: 350px;
-    border-width: 2px;
+.toolbar{
+    background-color: white;
+    height: 70px;
+}
+.toolbar-options{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.NoteContainer{
+   height: 500px;
+    border : cornsilk;
+    border-width: 0.5px;
     border-style: groove;
-
-    border-color: slateblue;
-    border-top-width: 10px;
-    border-right-width: 10px;
-    border-bottom-width: 10px;
-    border-left-width: 10px;
-   }
- 
-    .tab{
-   padding-left: 20px;
-   padding-right: 20px; 
-   padding-top:2px; 
 }
+    
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    padding-top: 20px;
+    // align-items: center;
+    justify-content: center;
+  }
+  .example-sidenav {
+    // padding: 20px;
+    width: 20%;
+  }
 
-.container p{
-    text-align: center;
-}
+  .toolbar-options{
+    padding-left: 10px;
+    background-color:white;
+    }
 
-.container a{
-    text-decoration: none;
-    padding-left: 60px;
+    .sideNavList{
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+      border-bottom: 1px;
+      padding-bottom: 10px;
+      border-style:groove ;
+    }
 
-}
+    .searchOption{
+      padding-left: 10px;
+      width: 3000px;
+      padding-top: 10px;
+      height: 50px;
+      border-radius: 15px;
+      background-color: whitesmoke;
+    }
 
+    .snavbarButtons{
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
 
+  .toolbar-last-option-buttons
+  {
+    // padding-left: 10px;
+    padding-right: 40px;
+    width: 100px;
+    //  background-color: grey;
+    padding-left: 100px;
+
+  }
+  .toolbar-option-buttons
+  {
+    // background-color: yellow;
+   padding-left: 80px;
+   width: 200px;
+   padding-right: 20;
+  // background-color: green($color: #df9931);
+  }
+  .snavbarButtons:hover{
+    // background-color:rgb(241, 239, 106);
+    background-color: #feefc3;
+  }
+  .snavbarButtons:focus{
+    background-color: #feefc3;
+  }
   
+  .buttons:hover{
+    background-color: rgb(223, 222, 209);
+  }
