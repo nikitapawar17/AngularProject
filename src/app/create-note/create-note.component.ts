@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NoteService } from '../note-service.service';
-
+import { DataService } from '../data.service';
 import { MaterialModule } from '../material.module';
 import { AuthenticationService, NoteInfo } from '../authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,8 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create-note.component.scss']
 })
 export class CreateNoteComponent {
-  selectable = true;
-  removable = true;
   visible = true;
 
   title = '';
@@ -25,9 +23,8 @@ export class CreateNoteComponent {
   is_archive = false;
   color = ''
 
-  
   notes=[];
-  constructor(private note_service:NoteService, private router:Router, private snackbar: MatSnackBar) { }
+  constructor(private note_service:NoteService, private router:Router, private data_service: DataService, private snackbar: MatSnackBar) { }
 
   create_note(){
     this.visible = true
@@ -51,7 +48,9 @@ export class CreateNoteComponent {
           duration:2000,
           verticalPosition: 'top',
           horizontalPosition:'center'});
-        // alert(response["message"]);
+          {
+          this.data_service.changed_data(response);
+          }
       },
       error => {
           console.error(error["error"]["message"]);

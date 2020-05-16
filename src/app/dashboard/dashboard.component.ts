@@ -41,9 +41,13 @@ export class DashboardComponent{
 
   get_trash_notes()
   {
-
     this.name="Trash";
     this.router.navigate(['/dashboard/trash']);
+  }
+  get_archived_notes()
+  {
+    this.name="Archive";
+    this.router.navigate(['/dashboard/archive'])
   }
 
 }

@@ -21,6 +21,7 @@ import { NoteComponent } from './note/note.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconComponent } from './icon/icon.component';
 import { TrashComponent } from './trash/trash.component';
+import { ArchiveComponent } from './archive/archive.component';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService} from './alert.service';
 
@@ -50,6 +51,9 @@ const routes : Routes = [
     {
       path : 'trash', component : TrashComponent
     },
+    {
+      path : 'archive', component : ArchiveComponent
+    },
   ]}
 
 ]
@@ -69,6 +73,7 @@ const routes : Routes = [
     CreateNoteComponent,
     IconComponent,
     TrashComponent,
+    ArchiveComponent,
     AlertComponent
   ],
   imports: [

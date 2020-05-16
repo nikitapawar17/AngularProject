@@ -2,7 +2,7 @@
 
         <div  class="IconOptions">
             <button mat-icon-button class = "buttons">           
-                <mat-icon fontSet = "material-icons-outlined" matTooltip ="Remind Me" >add_alert</mat-icon>
+                <mat-icon fontSet = "material-icons-outlined" matTooltip ="Remind Me">add_alert</mat-icon>
             </button>  
         </div>
     <div class="IconOptions">
@@ -32,7 +32,10 @@
     </div>
     <div class="IconOptions">
         <button mat-icon-button class="buttons">
-            <mat-icon fontSet = "material-icons-outlined" matTooltip ="Archive">archive</mat-icon>
+            <!-- <mat-icon fontSet = "material-icons-outlined"  (click)="is_archive()" matTooltip ="Archive">archive</mat-icon> -->
+            <mat-icon *ngIf = "note_info == undefined" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="Archive">archive</mat-icon>
+            <mat-icon *ngIf = "note_info != undefined && !note_info.is_archive" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="Archive">archive</mat-icon>
+            <mat-icon *ngIf = "note_info != undefined && note_info.is_archive" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="UnArchive">unarchive</mat-icon>
         </button>
     </div>
     

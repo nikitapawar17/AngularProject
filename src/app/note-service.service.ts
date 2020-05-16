@@ -30,5 +30,20 @@ export class NoteService
     return this.http.get(environment.base_url + endpoint_url)
    }
 
+  //  delete_note(note_id)
+  //  {
+  //   const endpoint_url= "note/detail/"
+  //   return this.http.get(environment.base_url + endpoint_url + note_id)
+  //  }
+
+  get_archived_notes(){
+    const endpoint_url= "note/archive"
+    return this.http.get(environment.base_url + endpoint_url)
+  }
+
+   is_archive(note_id){
+    const endpoint_url= "note/archive"
+    return this.http.post(environment.base_url + endpoint_url + note_id, note_id)
+  }
   
 }

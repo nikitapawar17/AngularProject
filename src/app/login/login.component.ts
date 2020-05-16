@@ -43,10 +43,10 @@ export class LoginComponent{
           this.auth_service.login(this.loginForm.value).subscribe(
             response => {
                 console.log(response["message"])
-                this.snackbar.open(response["message"], '',{
-                  duration:2000,
-                  verticalPosition: 'top',
-                  horizontalPosition:'center'});
+                // this.snackbar.open(response["message"], '',{
+                //   duration:2000,
+                //   verticalPosition: 'top',
+                //   horizontalPosition:'center'});
                 this.router.navigate(['/dashboard'])
                 this.loginForm.reset();
               },
