@@ -1,0 +1,64 @@
+<div  fxFlex.xs = "95" mat-dialog-content class = "matDialogContent">
+    <div fxLayoutAlign="start center" class = "title">
+        <label  class="titleLabel">Collaborators</label>
+     </div>
+     <div fxLayoutAlign = "start center" class="ownerInfo">
+        <span fxLayoutAlign = "start center" >
+             <mat-icon class="circular--square" fontSet = "material-icons-outlined">account_circle</mat-icon>
+        </span>
+        
+         <div fxLayout ="column">
+             <span class="owner">
+                 <label class="ownerName">{{ownerName}}
+                     <label class="ownerLabel">(owner)</label>
+                 </label>
+             </span>
+             <span class="emailID" fxLayout = "row">
+                 <label class="emailLabel">{{emailId}}</label>
+             </span>
+        </div>  
+     </div>
+ 
+     <div *ngIf ="collaboratorsArray" fxLayoutAlign ="space-around start" fxLayout = "column" class="collabList">
+         <div *ngFor = "let collab of collaboratorsArray" fxLayoutAlign = "start center" class=" collabInfo">
+             <div fxLayoutAlign = "start center" fxLayout ="row" class="collabImg">
+                 <mat-icon class="circular--square" fontSet = "material-icons-outlined" fxLayoutAlign = "center center">account_circle</mat-icon>
+            </div>
+          
+             <div fxLayout ="row"  fxLayoutAlign = "start center" class="collabEmail" fxFlex ="65">
+                <label class="emailLabel">{{collab.emailId}}</label>
+             </div> 
+             <div fxLayout ="row" fxLayoutAlign = "end center" class="collabRemove">
+                <button mat-icon-button>                       
+                    <!-- <button mat-icon-button (click)= "RemoveCollaborator(collab)"> -->
+                    <mat-icon fxLayoutAlign= "center center" class="removeIcon">clear</mat-icon>
+                </button> 
+            </div> 
+         </div>
+     </div>
+     
+     <div fxLayoutAlign = "start center" fxLayout="row" class="searchDiv">
+        <mat-icon fxLayout="row" fxlayoutAlign = "center center" fxFlex="10" fontSet = "material-icons-outlined" class="collabAddIcon">person_add</mat-icon> 
+         <!-- <input mat-input fxLayout="row" appearance="none" placeholder="Person or Email to share with" [(ngModel)]="collaborator" class="searchText">      
+    </div> 
+     <div fxLayout="column" fxlayoutAlign = "start center" *ngFor= "let email of persons" class="searchList">
+        <button mat-button (click)= "collaborator = email" fxlayoutAlign = "start center">
+            {{email}}
+        </button>  -->
+        <mat-form-field class="collabField">
+            <input type="text" matInput [matAutocomplete] = "auto" fxLayout = "row" appearance = "none"
+                placeholder="Person or Email to share with" [(ngModel)]="collaborator" class="searchText"> 
+                <!-- (keyup)="SearchPerson($e[matAutocomplete] = "auto"vent)" -->
+          </mat-form-field>
+          
+          <mat-autocomplete #auto="matAutocomplete" fxLayout = "column" fxlayoutAlign = "start center" class="searchList">
+            <mat-option *ngFor = "let email of persons" [value] = "email">{{email}}</mat-option> 
+          </mat-autocomplete>
+
+    </div>  
+
+    <div fxLayoutAlign = "end center" fxLayout = "row" class="bottom">
+         <button mat-button mat-dialog-close class="btn">Cancel</button>
+         <button mat-button class="btn" (click)="add_collaborator()">Save</button>
+     </div> 
+</div> 

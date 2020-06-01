@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
-  private updated_data = new BehaviorSubject('default data');
+  private updated_data = new BehaviorSubject({data:'', type:''});
   current_data = this.updated_data.asObservable();
 
   constructor() { }
 
-  changed_data(data: any)
+  changed_data(message: any)
   {
-    this.updated_data.next(data);
+    this.updated_data.next(message);
   }
 }

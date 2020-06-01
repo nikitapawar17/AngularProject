@@ -1,29 +1,40 @@
-    <div  *ngIf ="childMessage.length > 0 " class="main" fxLayoutAlign="center center" fxFlex="90" style="display: flex;
-        flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
+    <div  *ngIf ="childMessage.length > 0 " fxLayoutAlign="center center" fxLayout="view == true? 'row wrap':'column wrap'" class="main" fxLayoutAlign="center center" fxFlex="90" >
     
-        <mat-card fxFlex.xs = "100" *ngFor= " let note of childMessage.reverse()" style="padding-top: 10px;
-        padding-bottom: 10px; padding-right: 10px; padding-left: 10px; width: 200px; height: 102px; margin-right: 20px; "> 
+        <mat-card fxFlex.xs = "100" (mouseover)="is_note_checked = note.id" (mouseout)="is_note_checked = 0" *ngFor= " let note of childMessage.reverse()" [ngClass] ="view == true?'noteCard':'GridView'" > 
+            <button mat-icon-button [ngClass]="is_note_checked == note.id?'show':'hide'">
+                <mat-icon>check_circle</mat-icon>
+             </button> 
             <div class ="titletext" fxLayout="row" fxLayoutAlign="space-between center">  
                 <label class = "titleLabel">{{ note['title'] }} </label>
     
                 <div fxLayoutAlign="end center" fxLayout="row" class="pin">
-                    <!-- <button mat-icon-button fxLayoutAlign="center center">
-                       <img src = "/assets/images/pin.svg" *ngIf="!note.is_pin" matTooltip = "Pin Note" class="pinImg">
-                    </button>  -->
-                    <!-- <button mat-icon-button  fxLayoutAlign="center center">
-                      <img src = "/assets/images/pin2.png" *ngIf="note.is_pin"  matTooltip = "Unpin Note" class="pinImg">
-                    </button>  -->
+                    <button mat-icon-button fxLayoutAlign="center center">
+                       <img src = "/assets/images/unfilled.png" *ngIf="!note.is_pin" matTooltip = "Pin Note" class="pinImg">
+                    </button>  
+                   <button mat-icon-button  fxLayoutAlign="center center">
+                      <img src = "/assets/images/filled.png" *ngIf="note.is_pin"  matTooltip = "Unpin Note" class="pinImg">
+                    </button> 
                 </div>
             </div>
             
             <div class ="titletext" fxLayout="row" fxLayoutAlign="space-between center">
                 {{ note['description'] }}
             </div>
-        
-                   
+
+            <div *ngIf = "!note.is_trash && note.remainder != null || note.collaborate > 0" fxLayout = "row" fxLayoutAlign = "start  center" class="reminderCollab" >
+                <div *ngIf = "note.remainder != null" fxLayout = "row" fxLayoutAlign = "start center" class = "reminder">
+                    <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove_remainder(note)" [ngStyle]="{'backgroundColor' : note.color}" class="reminderSpan" style="background-color: #E0E0E6;">
+                        {{note['remainder'] | date : 'short'}}
+                        <mat-icon matChipRemove *ngIf="removable" matTooltip ="Remove Reminder">cancel</mat-icon>
+                    </mat-chip>
+                </div>
+            </div>
+
+
+         
                 <div class = "iconsDiv" fxLayoutAlign = "start center" fxLayout = "row">
                     <span class="icons" fxLayoutAlign = "start center" fxLayout = "row">
-                        <!-- <app-icon ></app-icon>      -->
+                        <app-icon [noteData]='note' [is_trash]='note.is_trash' (reminderEvent)="ReceiveReminder($event)"></app-icon>     
                     </span>
                 </div>
         </mat-card>    

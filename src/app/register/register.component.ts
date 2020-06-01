@@ -47,6 +47,10 @@ export class RegisterComponent{
           this.auth_service.register(this.registerForm.value).subscribe(
               response => {
                 console.log(response["message"])
+                localStorage.setItem("first_name", response["data"]["first_name"])
+                localStorage.setItem("last_name", response["data"]["last_name"])
+                localStorage.setItem("email", response["data"]["email"])
+               
                 this.snackbar.open(response["message"], '',{
                   duration:2000,
                   verticalPosition: 'top',

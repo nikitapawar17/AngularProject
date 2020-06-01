@@ -52,7 +52,6 @@ export class LoginComponent{
               },
               error => {
                   console.error(error["error"]["message"])
-                  // alert(error["error"]["message"])
                   this.snackbar.open(error["error"]["message"], '',{
                     duration:2000,
                     verticalPosition: 'top',

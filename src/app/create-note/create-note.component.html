@@ -24,8 +24,8 @@
            
             <div fxLayoutAlign="end center" fxLayout="row" class="pin">
                 <button mat-icon-button  fxLayoutAlign="center center">
-                    <img src="/assets/images/pin.svg" *ngIf="!is_pin" (click)="is_pin = true" class="pinImg">
-                    <img src ="/assets/images/pin2.png" *ngIf ="is_pin" (click)="is_pin = !is_pin" class="pinImg">
+                    <img src="/assets/images/unfilled.png" *ngIf="!is_pin" (click)="is_pin = true" class="pinImg">
+                    <img src ="/assets/images/filled.png" *ngIf ="is_pin" (click)="is_pin = !is_pin" class="pinImg">
                 </button> 
             </div>
         </div>
@@ -33,7 +33,7 @@
         <textarea matInput appearance="none" autofocus="true" placeholder="Take a note"[ngStyle]="{'backgroundColor' : color}" [(ngModel)] = "description" class="description" appearance="none" fxLayoutAlign="start center" ></textarea>
      
         <div class = "icons" fxLayoutAlign = "space-between center" fxLayout="row">
-            <app-icon fxLayoutAlign= "start center"></app-icon>
+            <app-icon fxLayoutAlign= "start center" (reminderEvent) = "ReceiveReminder($event)"></app-icon>
             <a mat-button fxLayoutAlign= "end center" (click)="create_note()">Close</a>
         </div>  
     </mat-card>

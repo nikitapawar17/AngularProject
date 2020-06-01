@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, TokenPayload, UserDetails } from '../authentication.service';
 import { FormsModule } from '@angular/forms';
+import { DataService } from '../data.service';
 
 import { Router } from '@angular/router';
 
@@ -12,9 +13,10 @@ import { Router } from '@angular/router';
 
 export class DashboardComponent{
   currentUser : UserDetails;
+  listView = 1;
   users : UserDetails[] = [];
 
-  constructor(private router: Router){
+  constructor(private router: Router, private data_service: DataService){
     // const user_obj = localStorage.getItem('token')
 
     // let payload 
@@ -44,11 +46,27 @@ export class DashboardComponent{
     this.name="Trash";
     this.router.navigate(['/dashboard/trash']);
   }
+  get_remainder_notes()
+  {
+    this.name="Remainder";
+    this.router.navigate(['/dashboard/remainder']);
+  }
   get_archived_notes()
   {
     this.name="Archive";
     this.router.navigate(['/dashboard/archive'])
   }
+
+  ChangeView(value)
+   {
+     this.listView = value;
+      this.data_service.changed_data(
+      {
+          type : "changeView",
+          data : value
+          // value
+      })
+   }
 
 }
 

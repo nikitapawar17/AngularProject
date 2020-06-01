@@ -18,14 +18,13 @@ export class NoteComponent implements OnInit {
   ngOnInit() 
   {
     this.data_service.current_data.subscribe(response => this.get_notes());
-    // this.get_notes();
+    this.get_notes();
   }
 
-  get_notes(){
 
+  get_notes(){
     this.note_service.get_notes().subscribe(
       response => {
-        console.log(response["data"]);
         this.parentMessage = response["data"]
         console.log(this.parentMessage)
 
@@ -36,16 +35,4 @@ export class NoteComponent implements OnInit {
       })
     }
 
-    // this.note_service.get_trash_note().subscribe(
-    //   response => {
-    //     console.log(response["data"]);
-    //     this.parentMessage = response["data"]
-    //     console.log(this.parentMessage)
-  
-    //   },
-    //   error => {
-    //   console.log(error["error"]["message"]);
-    //   alert(error["error"]["message"]);
-    //   })
-    // }
 }

@@ -42,6 +42,7 @@ export interface TokenPayload1{
 }
 
 export interface NoteInfo{
+    note_id: number,
     title: string,
     description: string,
     is_pin: boolean
@@ -103,13 +104,10 @@ export class AuthenticationService{
         }));
     }
 
-
-
     public forgot_password(user : TokenPayload): Observable<any> {
         const endpoint_url = "user/forgot_password/"
         return this.http.post(environment.base_url + endpoint_url, user)
     }
-
 
     public reset_password(user1 : TokenPayload1): Observable<any> {
         const endpoint_url = "user/reset_password/"

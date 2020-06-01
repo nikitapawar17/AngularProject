@@ -10,11 +10,6 @@
 }
 
 
-.cdk-drag-animating
-{
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
 .noteMat-card:last-child 
 {
   border: none;
@@ -50,6 +45,12 @@
 //  // border: groove;
 // }
 
+.GridView
+{
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 600px;
+}
 .show
 {
   display: block;
@@ -92,7 +93,10 @@
 }
 .pinImg
 {
-  width: 35px;
+  // width: 35px;
+  width: 24px;
+  height: 24px;
+  padding-left: 66px;
 }
 .description
 {
@@ -127,12 +131,7 @@
   border-radius: 50%;
   height: 30px; width: 30px
 }
-.collabSpan
-{
-  margin-bottom: 3px;
-  height: 100%; 
-  width: 32%;
-}
+
 .labels
 {
   width: 100%;

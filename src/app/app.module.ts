@@ -4,6 +4,9 @@ import { NgModule, Component } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';  
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +25,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconComponent } from './icon/icon.component';
 import { TrashComponent } from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { RemainderComponent } from './remainder/remainder.component';
+import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService} from './alert.service';
 
@@ -33,7 +38,6 @@ const routes : Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'forgot_password', component: ForgotPswdComponent},
   { path: 'reset_password/:token', component: ResetPswdComponent},
-
   { path: 'display_note', component: DisplayNoteComponent },
   { path : 'dashboard',component:DashboardComponent ,children: [
     {
@@ -45,14 +49,17 @@ const routes : Routes = [
     {
       path: 'create_note', component: CreateNoteComponent
     },
-    // {
-    //   path : 'display_note', component : DisplayNoteComponent
-    // },
     {
       path : 'trash', component : TrashComponent
     },
     {
       path : 'archive', component : ArchiveComponent
+    },
+    {
+      path : 'remainder', component : RemainderComponent
+    },
+    {
+      path : 'collaborator', component : CollaboratorComponent
     },
   ]}
 
@@ -74,7 +81,9 @@ const routes : Routes = [
     IconComponent,
     TrashComponent,
     ArchiveComponent,
-    AlertComponent
+    AlertComponent,
+    RemainderComponent,
+    CollaboratorComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +91,9 @@ const routes : Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule. forRoot(routes),
-    MaterialModule
+    MatSelectModule,
+    MaterialModule,
+    MatIconModule
     ],
   // providers: [AuthenticationService, AuthGuardService],
   // providers: [AuthenticationService, AuthGuardService, ResetPswdComponent],

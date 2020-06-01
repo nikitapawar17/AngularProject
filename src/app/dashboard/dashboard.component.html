@@ -36,8 +36,14 @@
                 </button>
             </div>
             <div>
+                <button fxShow fxHide.xs *ngIf = "listView == 1" mat-icon-button (click) ="ChangeView(2)">
+                    <mat-icon fontSet="material-icons-outlined" matTooltip ="List View">view_agenda</mat-icon>
+                </button>
+                <button fxShow fxHide.xs class="buttons" *ngIf = "listView == 2" mat-icon-button (click) ="ChangeView(1)">
+                    <img  src="/assets/images/grid_view.png" matTooltip ="Grid View" class = "img">
+<!-- 
                 <button mat-icon-button class="buttons" matTooltip="List View">
-                    <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon> -->
                 </button>
             </div>
             <div>
@@ -76,7 +82,7 @@
                     <img src="/assets/images/note.svg" style="padding-right: 10px;">
                     Notes
                 </a>
-                <a mat-list-item routerLink='.'  class="snavbarButtons">
+                <a mat-list-item routerLink='.'  (click)="get_remainder_notes()" class="snavbarButtons">
                     <mat-icon fontSet="material-icons-outlined" style="padding-right: 10px;">notifications_none
                     </mat-icon>
                     Reminder
@@ -102,7 +108,7 @@
                     <mat-icon fontSet="material-icons-outlined" style="padding-right: 10px;">archive</mat-icon>
                     Archive
                 </a>
-                <a mat-list-item routerLink='.' class="snavbarButtons" (click)="get_trash_notes()" >
+                <a mat-list-item routerLink='.' class="snavbarButtons" (click)="get_trash_notes()">
                     <mat-icon fontSet="material-icons-outlined" style="padding-right: 10px;">delete</mat-icon>
                     Trash
                 </a>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../note-service.service';
+import { DataService } from '../data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-trash',
@@ -10,8 +14,7 @@ export class TrashComponent implements OnInit {
   visible= false;
   trashNotes =[];
 
-
-  constructor(private note_service: NoteService) { }
+  constructor(private note_service: NoteService, private data_service: DataService, private snackbar: MatSnackBar, private dialog_box: MatDialog) { }
   parentMessage = [];
 
   ngOnInit(): void {
@@ -40,4 +43,41 @@ export class TrashComponent implements OnInit {
     })
   }
 
+  empty_trash(notes){
+    this.note_service.empty_trash(notes).subscribe(response=>
+      {
+        this.dialog_box.open(TrashDialog)
+
+        console.log(response["message"])
+        this.data_service.changed_data(response);
+
+        this.data_service.changed_data({
+            type: "getNotes"
+        })
+        this.snackbar.open(response["message"], '', 
+        {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        })
+      },
+      error =>
+      {
+        this.snackbar.open(error['error']['message'] ,'',
+        { 
+          duration:2000,    
+          verticalPosition: 'top',
+          horizontalPosition:'center' 
+        })
+      })
+    }  
 }
+
+
+
+
+@Component({
+  selector: 'trash_dialog',
+  templateUrl: 'trash_dialog.html',
+})
+export class TrashDialog {}

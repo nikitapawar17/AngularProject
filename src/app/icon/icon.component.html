@@ -1,12 +1,36 @@
     <div fxFlex.xs = "95" *ngIf="!is_trash" fxLayout="row" fxLayoutAlign = "start center" class="main">
+    <div  class="IconOptions">
+        <button mat-icon-button class = "buttons" [matMenuTriggerFor]="reminder" (click)= "GetTime()">           
+            <mat-icon fontSet = "material-icons-outlined" matTooltip ="Remind Me" >add_alert</mat-icon>
+        </button>
+        <mat-menu #reminder="matMenu">
+                <div>
+                <div fxLayout="row" fxLayoutAlign = "start center" class="title">
+                    <button mat-icon-button >
+                       <mat-icon fxLayoutAlign = "start center" fontSet="material-icons-outlined"  class="arrowIcon">keyboard_arrow_left</mat-icon>
+                    </button>
+                     <Label fxLayoutAlign = "start center">Pick Date & Time</Label> 
+                 </div>
+                              
+                 <div class="calendarOption">
+                    <div class="owlCalendar">   
+                         <input matInput fxLayoutAlign = "start center" placeholder="Select date & Time" [(ngModel)]="date" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                          <owl-date-time #dt></owl-date-time>             
+                     </div>
+                 </div>
 
-        <div  class="IconOptions">
-            <button mat-icon-button class = "buttons">           
-                <mat-icon fontSet = "material-icons-outlined" matTooltip ="Remind Me">add_alert</mat-icon>
-            </button>  
-        </div>
+                 <div fxLayoutAlign= "end center" class="saveBtn">
+                     <button mat-button (click)="add_remainder(date)">Save</button>
+                 </div>
+            </div>
+
+        </mat-menu>    
+       
+    </div>
+
+
     <div class="IconOptions">
-        <button mat-icon-button  class="buttons">
+        <button mat-icon-button  class="buttons" (click)="add_collaborator()">
             <mat-icon fontSet = "material-icons-outlined" matTooltip ="Collaborator">person_add</mat-icon>
         </button>
     </div>
@@ -32,10 +56,6 @@
     </div>
     <div class="IconOptions">
         <button mat-icon-button class="buttons">
-            <!-- <mat-icon fontSet = "material-icons-outlined"  (click)="is_archive()" matTooltip ="Archive">archive</mat-icon> -->
-            <mat-icon *ngIf = "note_info == undefined" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="Archive">archive</mat-icon>
-            <mat-icon *ngIf = "note_info != undefined && !note_info.is_archive" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="Archive">archive</mat-icon>
-            <mat-icon *ngIf = "note_info != undefined && note_info.is_archive" fontSet = "material-icons-outlined" (click)="is_archive()" matTooltip ="UnArchive">unarchive</mat-icon>
         </button>
     </div>
     
@@ -44,7 +64,7 @@
             <mat-icon fontSet = "material-icons-outlined">more_vert</mat-icon>
             <mat-menu #menu = "matMenu">
                <div>
-                    <button mat-menu-item>Delete Note</button>
+                    <button mat-menu-item (click)="delete_note()">Delete Note</button>
                     <button mat-menu-item>Add Label</button>
                     <button mat-menu-item>Add Drawing</button>
                     <button mat-menu-item>Show Checkboxes</button>   
@@ -59,7 +79,7 @@
 <div *ngIf="is_trash" fxLayout="row" fxLayoutAlign = "space-between center" class="trashIcons">
     <div class="IconOptions">
         <button mat-icon-button class = "buttons">
-            <mat-icon fontSet = "material-icons-outlined" matTooltip ="Delete Forever">delete_forever</mat-icon>
+            <mat-icon fontSet = "material-icons-outlined" matTooltip ="Delete Forever" (click)="delete_note()">delete_forever</mat-icon>
         </button>
     
         <button mat-icon-button class="buttons">

@@ -1,5 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoteService } from '../note-service.service';
+import { DataService } from '../data.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {CollaboratorComponent } from '../collaborator/collaborator.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+import { NoteInfo, AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-icon',
@@ -8,40 +16,110 @@ import { NoteService } from '../note-service.service';
 })
 export class IconComponent implements OnInit {
   @Input() is_trash;
+  @Input() noteData;
 
   colors = ['#fff','#f28b82','#fbbc04','#fff475','#ccff90','#a7ffeb','#cbf0f8','#aecbfa','#d7aefb',
               '#fdcfe8','#e6c9a8','#e8eaed'];
   
-   note_id : any;
-   @Input() note_info;
-
-  constructor(private note_service: NoteService) { }
+  constructor(private auth_service: AuthenticationService, private note_service: NoteService, private data_service: DataService, private snackbar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-  
-  is_archive()
-  {  
-    if(this.note_info != undefined)
-    {
-      console.log(this.note_info, "---->")
-      this.note_id = this.note_info.note_id;
+  date;
+  time;
+  note_id : any;
 
-      return this.note_service.is_archive(this.note_id).subscribe(response => {
-  
-      },
-      error =>
-      {
-        console.log("Error", error);
-      })
-    }
-    else
+  delete_note()
+  {
+    this.note_id = this.noteData.id
+    return this.note_service.delete_note(this.note_id).subscribe(response =>
     {
-        console.log(this.note_info)
-        alert("Invalid ")
+      this.data_service.changed_data(response); 
+
+      this.snackbar.open(response['message'] ,'Done',
+      { 
+        duration:2000,          
+        horizontalPosition:'start' 
+      }) 
+    },
+    error=>
+    {
+      console.error("error",error);
+    });
+  }
+
+  GetTime()
+  {
+    this.date = new Date();
+    this.time = this.date.getHours();
+  }
+
+  add_remainder(date)
+  {
+    this.note_id = this.noteData.id
+
+      return this.note_service.add_remainder(this.note_id, date).subscribe(response => {
+
+          this.data_service.changed_data(
+            {
+              type : "getNotes"
+            });
+        },
+        error =>{
+          console.log("Error", error);
+        });
+     }
+
+  add_collaborator()
+  {
+     if(this.noteData != undefined)
+     {
+        this.dialog.open(CollaboratorComponent,
+          {
+            panelClass: 'myapp-no-padding-dialog',
+            width : 'auto',
+            data : this.noteData
+          });
+      }
+     else
+     {
+        this.dialog.open(CollaboratorComponent,
+          {
+            panelClass: 'myapp-no-padding-dialog',
+            width : 'auto',
+            data : {}
+          });
+      }
     }
+  
+  // is_archive()
+  // {  
+  //   if(this.noteData != undefined)
+  //   {
+  //     this.note_id = this.noteData.note_id;
+  //     return this.note_service.is_archive(this.note_id).subscribe(response => {
+  //       // this.data_service.changed_data(response)
+  //       this.data_service.changed_data({
+  //         type : 'getNotes'
+  //       })
+
+  //       this.snackbar.open(response['message'], 'Done', {
+  //         duration :2000,
+  //         horizontalPosition : 'start'
+  //       })
+  
+  //     },
+  //     error =>
+  //     {
+  //       console.log("Error", error);
+  //     })
+  //   }
+  //   else
+  //   {
+  //       console.log(this.noteData)
+  //       this.archive_event.emit('true')
+  //   }
      
-    }
 
 }
