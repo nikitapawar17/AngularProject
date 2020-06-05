@@ -36,8 +36,6 @@ export class ForgotPswdComponent{
        }
 
       forgot_password() {
-
-
           this.auth_service.forgot_password(this.forgot_pswd_form.value).subscribe(
             response => {
                 console.log(response["message"])
@@ -49,13 +47,11 @@ export class ForgotPswdComponent{
                 this.forgot_pswd_form.reset();
               },
               error => {
-                  console.error(error["error"]["message"])
-                //   alert(error["error"]["message"])
+                console.error(error["error"]["message"])
                 this.snackbar.open(error["error"]["message"], '',{
                     duration:2000,
                     verticalPosition: 'top',
                     horizontalPosition:'center'});
-
               }
           )
       }

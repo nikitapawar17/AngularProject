@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +29,21 @@ export class NoteService
     return this.http.get(environment.base_url + endpoint_url)
    }
 
+   edit_note(note_id, data)
+   {
+    const endpoint_url= "note/detail/" + note_id
+    return this.http.put(environment.base_url + endpoint_url, data)
+   }
+
    delete_note(note_id)
    {
     const endpoint_url= "note/detail/"
+    return this.http.delete(environment.base_url + endpoint_url + note_id)
+   }
+
+   trash_note(note_id)
+   {
+    const endpoint_url= "note/trash/"
     return this.http.delete(environment.base_url + endpoint_url + note_id)
    }
 
@@ -67,7 +79,25 @@ export class NoteService
    }
 
   empty_trash(data){
-    const endpoint_url= "delete/all/note"
+    const endpoint_url= "note/delete/all/"
     return this.http.delete(environment.base_url + endpoint_url, data)
+  }
+
+  change_color(note_id, color)
+  {
+    const endpoint_url = "note/detail/" + note_id
+    return this.http.put(environment.base_url + endpoint_url, color);
+  }
+
+  note_pin(note_id)
+  {
+    const endpoint_url= "note/pin/" + note_id
+    return this.http.put(environment.base_url + endpoint_url, note_id);
+  }
+
+  note_unpin(note_id)
+  {
+    const endpoint_url= "note/unpin/" + note_id
+    return this.http.put(environment.base_url + endpoint_url, note_id);
   }
 }

@@ -1,0 +1,39 @@
+
+ <div fxFlex.xs = "95" mat-dialog-content class = "matDialogContent" [ngStyle]="{'backgroundColor' : data.color}" >
+  
+    <div class ="titletext" fxLayout="row" fxLayoutAlign="space-between center">              
+       <textarea matInput appearance="none" placeholder="Title" [(ngModel)]="data.title"  class="title-text" fxLayoutAlign="center center"[ngStyle]="{'backgroundColor' : data.color}" ></textarea>  
+        <div fxLayoutAlign="end center" fxLayout="row" class="pin">
+            <button mat-icon-button  fxLayoutAlign="center center">
+                <img src="/assets/svg/unfilled.svg" *ngIf="!data.is_pin" (click)="data.isPin = true">
+                <img src ="/assets/png/filled.png" *ngIf ="data.is_pin" (click)="data.isPin = !data.isPin">
+            </button> 
+        </div>
+    </div>
+
+    <textarea matInput appearance="none" autofocus="true" placeholder="Take a note" [(ngModel)]="data.description" class="description" fxLayoutAlign="start center" [ngStyle]="{'backgroundColor' : data.color}" ></textarea>     
+
+    <div class="titletext" fxLayout ="row" fxLayoutAlign="start center"  class="description" [ngStyle]="{'backgroundColor' : data.color}">
+        <div *ngIf = "data.remainder != null" fxLayout = "row" fxLayoutAlign = "start center" class = "reminder">
+            <mat-chip [selectable]="selectable" [removable]="removable"  [ngStyle]="{'backgroundColor' : data.color}" class="reminderSpan">
+                {{data['remainder'] | date : 'short'}}
+                <mat-icon matChipRemove *ngIf="removable" matTooltip ="Remove Reminder">cancel</mat-icon>
+            </mat-chip>   
+        </div>
+    </div>
+    
+    <div *ngIf = "labelsArray.length > 0" class="labels" fxLayout ="row" fxLayoutAlign="start center">
+        <mat-chip-list #chipList fxLayout="row wrap" fxLayoutAlign="start center">
+            <mat-chip *ngFor="let label of labelsArray" class="label_name" [ngStyle]="{'backgroundColor' : data.color}" [selectable]="selectable"
+                    [removable]="removable">
+                    {{label.label}}
+                <mat-icon matChipRemove *ngIf="removable" matTooltip ="Remove Label">cancel</mat-icon>
+            </mat-chip>
+         </mat-chip-list>
+    </div>
+   
+    <div class="icons" fxLayoutAlign="space-between center" fxLayout="row" fsxFlex="60">
+        <app-icon></app-icon>     
+        <button mat-button class="button" (click)="edit_note()">Close</button>     
+    </div> 
+</div>

@@ -1,0 +1,35 @@
+<div mat-dialog-content class = "matDialogContent">
+    <div fxLayoutAlign="start center" class = "title">
+        <label>Edit Labels</label>
+     </div>
+     
+     <div fxLayout = "row" fxLayoutAlign = "space-between center" class ="createLabel">
+        <button mat-icon-button fxLayout="row" class ="matIcon">
+            <mat-icon fxLayoutAlign= "center center" (click) = "clear()">clear</mat-icon>
+        </button> 
+        <mat-form-field  appearance="none" fxLayoutAlign="start center" fxLayout="row" fxFlex=75%>
+            <input matInput placeholder="Create new label" [(ngModel)]="label" class="inputText">
+          </mat-form-field> 
+          <button mat-icon-button fxLayout="row" fxFlex="10" class="matIcon">
+            <mat-icon fxLayoutAlign= "center center"  (click)="create_label()">done</mat-icon>
+        </button> 
+     </div>
+
+     <div *ngIf = "labelsArray.length > 0" fxLayout ="column" fxLayoutAlign ="space-around start" class="labelsContainer">
+        <div *ngFor = "let labelInfo of labelsArray" class ="labelList">
+            <button mat-icon-button fxLayout="row" fxFlex="10"  class ="labelIcon" fxLayoutAlign="start center" (click) ="delete_label(labelInfo)">
+                <mat-icon fontSet="material-icons-outlined" fxLayoutAlign="center center">delete</mat-icon>
+            </button> 
+            <mat-form-field appearance = "none" fxLayoutAlign = "start center" fxLayout = "row" fxFlex = 75% class="labelText">
+                <input matInput [(ngModel)]="labelInfo.label" class="inputText">
+              </mat-form-field> 
+              <button mat-icon-button fxLayout="row" fxFlex="10" class="matIcon">
+                <mat-icon fxLayoutAlign= "center center">done</mat-icon>
+            </button> 
+        </div>
+     </div>
+     
+     <div fxLayoutAlign = "end center" fxLayout = "row" class="lastOptions">
+         <button mat-button mat-dialog-close class="button">Done</button>
+     </div>
+</div>

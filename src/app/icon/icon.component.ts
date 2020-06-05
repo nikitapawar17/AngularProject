@@ -35,18 +35,84 @@ export class IconComponent implements OnInit {
     this.note_id = this.noteData.id
     return this.note_service.delete_note(this.note_id).subscribe(response =>
     {
-      this.data_service.changed_data(response); 
+      // this.data_service.changed_data(response); 
 
       this.snackbar.open(response['message'] ,'Done',
       { 
         duration:2000,          
         horizontalPosition:'start' 
       }) 
+      this.data_service.changed_data({
+        type : "getNotes",             
+        })
     },
     error=>
     {
       console.error("error",error);
     });
+  }
+
+  trash_note()
+  {
+    this.note_id = this.noteData.id
+    return this.note_service.trash_note(this.note_id).subscribe(response =>
+    {
+      // this.data_service.changed_data(response); 
+
+      this.snackbar.open(response['message'] ,'Done',
+      { 
+        duration:2000,          
+        horizontalPosition:'start' 
+      })
+      this.data_service.changed_data({
+        type : "getNotes",             
+        }) 
+    },
+    error=>
+    {
+      console.error("error",error);
+    });
+  }
+
+  change_color(color)
+  {
+    console.log(this.noteData)
+    if(this.noteData != undefined)
+    {
+
+        this.note_id =this.noteData.id;
+        console.log(this.noteData, this.note_id)
+
+        let noteColor=
+        {
+          color : color
+        }
+        
+        return this.note_service.change_color(this.note_id, noteColor).subscribe(response =>
+        {       
+          this.data_service.changed_data(
+          {
+              type :  'getNotes'
+          })       
+          this.snackbar.open(response['message'],'',
+          {
+            duration : 2000,
+            horizontalPosition : 'start'
+          })
+        },
+        error =>
+        {
+          console.log("Error", error);
+        })
+    }
+    else
+    {
+       this.data_service.changed_data(
+         {
+           data : color,
+           type : "changeColor"
+         })
+    }
   }
 
   GetTime()

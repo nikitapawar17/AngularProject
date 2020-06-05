@@ -89,15 +89,15 @@
                 </a>
             </mat-nav-list>
         </div>
-        <div class="sideNavList" style="padding-top: 10px;">
-            <Label style="padding-left: 20px; font-size: 12px;">LABELS</Label>
+        <div class="sideNavList">
+            <Label class="label">LABELS</Label>
             <mat-nav-list>
-                <a mat-list-item routerLink='.' class="snavbarButtons">
-                    <mat-icon fontSet="material-icons-outlined" style="padding-right: 10px;">label</mat-icon>
-                    label
+                <a mat-list-item *ngFor = "let label of labels" routerLink='.' class="snavbarButtons">
+                    <mat-icon fontSet="material-icons-outlined" class="navListIcon">label</mat-icon>
+                    {{label.label}}
                 </a>
-                <a mat-list-item routerLink='.' class="snavbarButtons">
-                    <mat-icon fontSet="material-icons-outlined" style="padding-right: 10px;">edit</mat-icon>
+                <a mat-list-item routerLink='.' class="snavbarButtons" (click) = "edit_labels()">
+                    <mat-icon fontSet="material-icons-outlined" class="navListIcon">edit</mat-icon>
                     Edit Labels
                 </a>
             </mat-nav-list>

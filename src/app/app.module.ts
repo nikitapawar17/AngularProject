@@ -6,8 +6,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,6 +25,8 @@ import { TrashComponent } from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { RemainderComponent } from './remainder/remainder.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
+import { EditLabelComponent } from './edit-label/edit-label.component';
+import { EditNoteComponent }  from './edit-note/edit-note.component';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService} from './alert.service';
 
@@ -61,6 +61,12 @@ const routes : Routes = [
     {
       path : 'collaborator', component : CollaboratorComponent
     },
+    {
+      path: 'editlabel', component : EditLabelComponent
+    },
+    {
+      path: 'editnote', component : EditNoteComponent
+    }
   ]}
 
 ]
@@ -83,7 +89,9 @@ const routes : Routes = [
     ArchiveComponent,
     AlertComponent,
     RemainderComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    EditLabelComponent,
+    EditNoteComponent
   ],
   imports: [
     BrowserModule,

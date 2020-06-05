@@ -21,8 +21,9 @@ export class CreateNoteComponent {
   id;
   title = '';
   description = '';
-  is_pin = false;
   color= '';
+  is_pin = false;
+  is_deleted= false;
   is_trash = false;
   is_archive = false;
   remainder = null;
@@ -34,6 +35,14 @@ export class CreateNoteComponent {
   
   ngOnInit() 
   {
+     this.data_service.current_data.subscribe(response =>
+      {
+        if(response.type == "changeColor")
+        {
+          this.color = response.data
+        }
+      })
+
       this.data_service.current_data.subscribe(response =>
         {
           if(response.type == "addCollaborator")
@@ -54,7 +63,6 @@ export class CreateNoteComponent {
   {
     this.dialog.open(CollaboratorComponent,
       {
-        // panelClass: 'myapp-no-paddin  g-dialog',
         width : '500px',
         data : collaborators
       });
@@ -69,7 +77,10 @@ export class CreateNoteComponent {
         id: this.id,
         title: this.title,
         description: this.description,
+        color: this.color,
         is_pin: this.is_pin,
+        is_trash: this.is_trash,
+        is_deleted: this.is_deleted,
         is_archive: this.is_archive,
         remainder : this.remainder,
         collaborators : this.collaborators
@@ -78,6 +89,10 @@ export class CreateNoteComponent {
       this.title=''
       this.description=''
       this.is_pin = false
+      this.is_trash = false
+      this.is_deleted = false
+      this.is_archive = false 
+      this.color = "#fff"
       this.remainder = null
       this.collaborators = [];
       
