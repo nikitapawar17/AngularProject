@@ -100,4 +100,12 @@ export class NoteService
     const endpoint_url= "note/unpin/" + note_id
     return this.http.put(environment.base_url + endpoint_url, note_id);
   }
+
+  add_label(data)
+  {
+    const endpoint_url= "label/add/" 
+    return this.http.post(environment.base_url + endpoint_url, data.note_id);
+  }
+
+
 }

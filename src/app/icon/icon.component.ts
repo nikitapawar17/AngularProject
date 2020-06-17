@@ -18,6 +18,8 @@ export class IconComponent implements OnInit {
   @Input() is_trash;
   @Input() noteData;
 
+  @Output() labelEvent = new EventEmitter<string>();
+
   colors = ['#fff','#f28b82','#fbbc04','#fff475','#ccff90','#a7ffeb','#cbf0f8','#aecbfa','#d7aefb',
               '#fdcfe8','#e6c9a8','#e8eaed'];
   
@@ -25,9 +27,11 @@ export class IconComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  labelsMenuOption = false;
+  undefinedNotelabels = [];
   date;
   time;
+  labels = [];
   note_id : any;
 
   delete_note()
@@ -159,6 +163,72 @@ export class IconComponent implements OnInit {
       }
     }
   
+    checked_label(label)
+  {
+    if(this.noteData != undefined)
+    {
+      for(let i =0; i < this.noteData.labels.length; i++)
+      {
+        if(this.noteData.labels[i].id == label)
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+   
+    if(this.noteData == undefined)
+    {
+      for(let i= 0;i< this.undefinedNotelabels.length ; i++)
+      {
+        if(this.undefinedNotelabels[i].id == label)
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
+    add_label(value, label)
+  {   
+    this.labelsMenuOption = false;
+      if(this.noteData != undefined)
+      { 
+        let data = 
+        {
+          noteID :this.noteData.noteID,
+          labelID : label.id
+        }
+  
+        this.note_service.add_label(data).subscribe(response =>
+          {
+            this.labelEvent.emit(label);
+    
+            this.data_service.changed_data(
+              {
+                type : "getNotes"
+              });
+          },
+          error =>
+          {
+            console.log("Error ",error);
+    
+            this.snackbar.open(error.error['message'],'Done',
+            {
+              duration : 2000,
+              verticalPosition : 'top',
+              horizontalPosition :'center'
+            })
+          })
+      }
+      else
+      {
+        this.labelEvent.emit(label);
+      }
+  }
+  
+
   // is_archive()
   // {  
   //   if(this.noteData != undefined)
@@ -186,6 +256,4 @@ export class IconComponent implements OnInit {
   //       console.log(this.noteData)
   //       this.archive_event.emit('true')
   //   }
-     
-
-}
+}  

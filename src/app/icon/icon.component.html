@@ -63,11 +63,16 @@
         <button mat-icon-button [matMenuTriggerFor]="menu" class="buttons">    
             <mat-icon fontSet = "material-icons-outlined">more_vert</mat-icon>
             <mat-menu #menu = "matMenu">
-               <div>
+               <div *ngIf = "!labelsMenuOption">
                     <button mat-menu-item (click)="trash_note()">Delete Note</button>
                     <button mat-menu-item>Add Label</button>
                     <button mat-menu-item>Add Drawing</button>
                     <button mat-menu-item>Show Checkboxes</button>   
+                </div>
+                <div *ngIf = "labelsMenuOption">
+                    <div fxLayoutAlign="start center" *ngFor = "let label of labels">   
+                        <mat-checkbox [checked]="checked_label(label.id)" fxLayout ="20" style="padding-left: 10px;" (change)="add_label(checked_label(label.id), label)">{{label.label}}</mat-checkbox> 
+                    </div>
                 </div>
             </mat-menu>
         </button>   
@@ -87,3 +92,7 @@
         </button>
     </div>
 </div>
+
+
+
+

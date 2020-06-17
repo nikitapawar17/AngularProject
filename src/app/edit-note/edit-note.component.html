@@ -5,8 +5,8 @@
        <textarea matInput appearance="none" placeholder="Title" [(ngModel)]="data.title"  class="title-text" fxLayoutAlign="center center"[ngStyle]="{'backgroundColor' : data.color}" ></textarea>  
         <div fxLayoutAlign="end center" fxLayout="row" class="pin">
             <button mat-icon-button  fxLayoutAlign="center center">
-                <img src="/assets/svg/unfilled.svg" *ngIf="!data.is_pin" (click)="data.isPin = true">
-                <img src ="/assets/png/filled.png" *ngIf ="data.is_pin" (click)="data.isPin = !data.isPin">
+                <img src="/assets/svg/unfilled.svg" *ngIf="!data.is_pin" (click)="data.is_pin = true">
+                <img src ="/assets/png/filled.png" *ngIf ="data.is_pin" (click)="data.is_pin = !data.is_pin">
             </button> 
         </div>
     </div>
@@ -25,8 +25,7 @@
     <div *ngIf = "labelsArray.length > 0" class="labels" fxLayout ="row" fxLayoutAlign="start center">
         <mat-chip-list #chipList fxLayout="row wrap" fxLayoutAlign="start center">
             <mat-chip *ngFor="let label of labelsArray" class="label_name" [ngStyle]="{'backgroundColor' : data.color}" [selectable]="selectable"
-                    [removable]="removable">
-                    {{label.label}}
+                    [removable]="removable">{{label.label}}
                 <mat-icon matChipRemove *ngIf="removable" matTooltip ="Remove Label">cancel</mat-icon>
             </mat-chip>
          </mat-chip-list>
@@ -37,3 +36,5 @@
         <button mat-button class="button" (click)="edit_note()">Close</button>     
     </div> 
 </div>
+
+

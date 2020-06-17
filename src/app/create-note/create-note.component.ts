@@ -29,8 +29,9 @@ export class CreateNoteComponent {
   remainder = null;
   collaborators = [];
 
-
   notes=[];
+  labels =[];
+
   constructor(public dialog: MatDialog, private note_service:NoteService, private router:Router, private data_service: DataService, private snackbar: MatSnackBar) { }
   
   ngOnInit() 
@@ -83,7 +84,8 @@ export class CreateNoteComponent {
         is_deleted: this.is_deleted,
         is_archive: this.is_archive,
         remainder : this.remainder,
-        collaborators : this.collaborators
+        collaborators : this.collaborators,
+        labels: this.labels
       }
 
       this.title=''
@@ -95,6 +97,7 @@ export class CreateNoteComponent {
       this.color = "#fff"
       this.remainder = null
       this.collaborators = [];
+      this.labels = []
       
 
     this.note_service.create_note(noteData).subscribe(

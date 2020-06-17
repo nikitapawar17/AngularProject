@@ -46,17 +46,6 @@ export class EditNoteComponent implements OnInit {
     console.log("array2 :",this.labelsArray)
   }
 
-  remove_label_event($event)
-  {
-    // console.log("array :",this.labelsArray)
-    
-    var find = this.labelsArray.find(function(item){return item.label === $event.label});
-    var index = this.labelsArray.indexOf(find);
-    this.labelsArray.splice(index);
-   
-    // console.log("array :",this.labelsArray)
-  }
-
    receive_color($event)
    {
      this.data.color = $event
